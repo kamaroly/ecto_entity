@@ -54,7 +54,7 @@ defmodule Entity.AppHelpersTest do
 
     # Assert
     assert %Person{} = Person.last
-    Person.last.id > Person.first.id
+    assert Person.last.id > Person.first.id
   end
 
   test "Retrieves a record by id" do
