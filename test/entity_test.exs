@@ -41,11 +41,9 @@ defmodule Entity.AppHelpersTest do
     assert Person.first.id == 1
   end
 
-  test "first!/0 fails when id does not exist" do
-    Person.truncate
-
-    assert_raise Ecto.NoResultsError do
-      Person.first!
+  test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
+    assert_raise Ecto.NoResultsError, fn ->
+      Person.find!(1999999999)
     end
   end
 
@@ -60,6 +58,8 @@ defmodule Entity.AppHelpersTest do
   end
 
   test "Retrieves a record by id" do
+    seed_people(4)
+
     assert %Person{} = Person.find(1)
     assert Person.find(1).id == 1
   end
