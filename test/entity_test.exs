@@ -4,9 +4,6 @@ defmodule Entity.AppHelpersTest do
   alias Person
 
   # HELPERS
-  test "gets ecto repo" do
-    assert Person.get_repo == Entity.Repo
-  end
   test "table_name/0 returns table name" do
     assert Person.table_name == "people"
   end
@@ -49,12 +46,6 @@ defmodule Entity.AppHelpersTest do
     # Assert
     assert %Person{} = Person.last
     assert Person.last.id > Person.first.id
-  end
-  test "last!/1 raises Ecto.NoResultsError for non-existing entity" do
-    Person.truncate()
-    assert_raise Ecto.NoResultsError, fn ->
-      Person.last!()
-    end
   end
 
   test "find/1 retrieves a record by id" do

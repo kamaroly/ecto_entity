@@ -1,4 +1,4 @@
-defmodule Entity.AppHelpers do
+defmodule Entity.Helpers do
 
   @doc """
   Returns the first loaded app name
@@ -16,5 +16,4 @@ defmodule Entity.AppHelpers do
      Application.get_env(app_name(), :ecto_repos, [])
      |> Enum.at(0)
   end
-
 end
