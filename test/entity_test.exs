@@ -1,33 +1,27 @@
 defmodule Entity.AppHelpersTest do
   use ExUnit.Case
-  alias Person # Represent Any Schema using Ecto
+  use Factory
+  alias Person
 
-  # TEST HELPER FUNCTIONS
-  def person_attrs do
-    %{
-      first_name: Faker.first_name,
-      last_name: Faker.last_name,
-      age: Faker.random_digit
-    }
-  end
-
-  def seed_people(count \\ 1) do
-    1..count
-    |> Enum.each(fn _ -> Person.insert(person_attrs()) end)
-  end
-
+  # HELPERS
   test "gets ecto repo" do
     assert Person.get_repo == Entity.Repo
   end
+  test "table_name/0 returns table name" do
+    assert Person.table_name == "people"
+  end
 
+  # CREATING TESTS
+  # ===============
   test "create/1 stores data." do
     assert {:ok, %Person{}} = Person.create(person_attrs())
   end
-
   test "insert/1 stores data." do
     assert {:ok, %Person{}} = Person.insert(person_attrs())
   end
 
+  # DELETING TESTS
+  # ================
   test "truncate/0 empties table" do
     # Create records
     seed_people(5)
@@ -35,10 +29,39 @@ defmodule Entity.AppHelpersTest do
     assert {:ok, _} = Person.truncate()
   end
 
-  # Many records are previous created, so no need to seed database
+  # READING TESTS
+  # =============
   test "first/0 returns first records" do
     seed_people(10)
     assert Person.first.id == 1
+  end
+  test "first!/1 raises Ecto.NoResultsError for non-existing entity" do
+    Person.truncate()
+    assert_raise Ecto.NoResultsError, fn ->
+      Person.first!()
+    end
+  end
+
+  test "last/0 retrieves the last record in the table" do
+    # Seed database
+    seed_people(2)
+
+    # Assert
+    assert %Person{} = Person.last
+    assert Person.last.id > Person.first.id
+  end
+  test "last!/1 raises Ecto.NoResultsError for non-existing entity" do
+    Person.truncate()
+    assert_raise Ecto.NoResultsError, fn ->
+      Person.last!()
+    end
+  end
+
+  test "find/1 retrieves a record by id" do
+    seed_people(4)
+
+    assert %Person{} = Person.find(1)
+    assert Person.find(1).id == 1
   end
 
   test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
@@ -47,20 +70,32 @@ defmodule Entity.AppHelpersTest do
     end
   end
 
-  test "Retrieves the last record in the table" do
-    # Seed database
-    Person.create(person_attrs())
-    Person.create(person_attrs())
+  test "all/1 returns all records in a table" do
+    count = 20
 
-    # Assert
-    assert %Person{} = Person.last
-    assert Person.last.id > Person.first.id
+    Person.truncate()
+    seed_people(count)
+
+    assert Enum.count(Person.all()) == count
   end
 
-  test "Retrieves a record by id" do
-    seed_people(4)
+  test "take/1 returns the  first x records" do
+    Person.truncate()
+    seed_people(50)
+    assert 13 ==  Enum.count(Person.take(13))
+  end
 
-    assert %Person{} = Person.find(1)
-    assert Person.find(1).id == 1
+  test "count/0 returns a number of records in DB" do
+    Person.truncate()
+    seed_people(98)
+
+    assert Person.count == 98
+  end
+
+  test "size/0 returns a number of table records" do
+    Person.truncate()
+    seed_people(20)
+
+    assert Person.size == 20
   end
 end
