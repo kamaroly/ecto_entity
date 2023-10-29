@@ -1,4 +1,5 @@
 defmodule Entity.Delete do
+  import Ecto.Query
   import Entity.Helpers, only: [get_repo: 0]
   use Entity.Read, only: [find!: 1]
 
@@ -37,17 +38,22 @@ defmodule Entity.Delete do
 
         ## Examples
 
-            iex> SchemaModule.destroy(id)
-            {:ok, %SchemaModule{}}
-
-            iex> SchemaModule.destroy(%SchemaModule{})
-            {:ok, %SchemaModule{}}
+            iex> Person.delete(31)
+            iex> {:ok,
+              %Person{
+                __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+                id: 31,
+                first_name: "Roman",
+                last_name: "Haag",
+                age: nil
+              }}
 
         """
-        def destroy(id) do
-          find!(id)
-          |> get_repo().delete()
-        end
+        def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
+        def destroy(entity) when is_map(entity), do: destroy(entity.id)
+
+        def delete(entity), do: destroy(entity)
+
       end
     end
 end

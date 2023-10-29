@@ -11,6 +11,57 @@ defmodule Entity do
 
   The goal of this package is to make it deadly simple to interact with Ecto without having to necessary write custom CRUD operations.
 
+  # Getting Started
+  This guide is an introduction to Entity, the missing Phoenix Ecto package to achieve +80% of common operations
+  less than 20% of effort it would normally take.
+  Entity provides a standardized API and a set of abstractions for interacting with database tables, so that your phoenix Elixir developers
+  can focus on what's specific to your project.
+
+  In this guide, we're going to learn some basics about Entity, such as creating,
+  reading, updating and destroying records from a database. If you want
+  to see the code from this guide, you can view it [at ecto/examples/friends on GitHub](https://github.com/kamaroly/ecto_entity).
+
+  **This guide will require you to have setup Entity beforehand.**
+  ## Install Entity in your Phoenix / Elixir App
+  To add Entity to your application, The first step is to add Entity to your `mix.exs` file,
+  which we'll do by changing the `deps` definition in that file to this:
+
+  ```elixir
+  defp deps do
+    [
+      {:entity, "~> 0.1.0"}
+    ]
+  end
+  ```
+
+  Then, to install it, you will run this command:
+
+  ```
+  mix deps.get
+  ```
+
+  To start off with, we'll need to include `Entity` in our existing Phoenix Schema like the following:
+  ```elixir
+
+    defmodule MyApp.Person do
+      import Ecto.Changeset
+      use Ecto.Schema
+      use Entity
+
+      schema "people" do
+        field :first_name, :string
+        field :last_name, :string
+        field :age, :integer
+      end
+
+      def changeset(entity, attrs) do
+        entity
+        |> cast(attrs, [:first_name, :last_name])
+        |> validate_required([:first_name, :last_name])
+      end
+    end
+  ```
+
   ## The `create/1` and `insert/1` function
   You can use `create` or `insert` stores a new data entry. Schema module must have changeset method implementedUse the create method,
   which accepts an schema of attributes, creates, and inserts it into the database.
@@ -25,6 +76,78 @@ defmodule Entity do
     last_name: "Turner",
     age: 3
   }}
+
+  ## Reading methods
+
+  ### The `find/1` returns entry with id matching what passed
+
+  ```elixir
+
+    iex> Person.find(5)
+    %Person{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+      id: 5,
+      first_name: "Kristopher",
+      last_name: "Keeling",
+      age: 9
+    }
+  ```
+
+  ### The `all/0` function to return all table entries
+
+  Retrieves all database entries from a schema module
+
+  iex> Person.all()
+      [
+        %Person{
+          __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+          id: 1,
+          first_name: "German",
+          last_name: "OConnell",
+          age: 2
+        },
+        %Person{
+          __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+          id: 2,
+          first_name: "Fritsch",
+          last_name: "Kassulke",
+          age: 8
+        },
+        %Person{
+          __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+          id: 3,
+          first_name: "Russel",
+          last_name: "Collins",
+          age: 3
+        }
+      ]
+
+  ### The `take/1` function to return x number of records
+
+  ```Elixir
+
+  iex>  Person.take(2)
+    [
+    %Person{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+      id: 1,
+      first_name: "German",
+      last_name: "OConnell",
+      age: 2
+    },
+    %Person{
+      __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+      id: 2,
+      first_name: "Fritsch",
+      last_name: "Kassulke",
+      age: 8
+    }
+  ]
+  ```
+
+  ### The `first/0` function to return the first table entry
+
+  ### The `last/0` function to return the last table entry
 
 
   ## The `update/2` function
