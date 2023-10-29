@@ -51,7 +51,7 @@ defmodule Entity.MixProject do
 
    defp package() do
     [
-      name: "entity",
+      name: "Entity",
       # These are the default files included in the package
       files: ~w(lib mix.exs doc README* test),
       licenses: ["MIT"],
