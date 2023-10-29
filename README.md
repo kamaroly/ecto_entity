@@ -22,7 +22,7 @@ reading, updating and destroying records from a database. If you want
 to see the code from this guide, you can view it [at kamaroly/ecto_entity on GitHub](https://github.com/kamaroly/ecto_entity).
 
 **This guide will require you to have setup Entity beforehand.**
-## Installation
+### Installation
 To add Entity to your application, The first step is to add Entity to your `mix.exs` file,
 which we'll do by changing the `deps` definition in that file to this:
 
