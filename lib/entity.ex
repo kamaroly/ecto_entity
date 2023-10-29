@@ -19,7 +19,7 @@ defmodule Entity do
 
   In this guide, we're going to learn some basics about Entity, such as creating,
   reading, updating and destroying records from a database. If you want
-  to see the code from this guide, you can view it [at ecto/examples/friends on GitHub](https://github.com/kamaroly/ecto_entity).
+  to see the code from this guide, you can view it [at kamaroly/ecto_entity on GitHub](https://github.com/kamaroly/ecto_entity).
 
   **This guide will require you to have setup Entity beforehand.**
   ## Install Entity in your Phoenix / Elixir App
@@ -27,11 +27,13 @@ defmodule Entity do
   which we'll do by changing the `deps` definition in that file to this:
 
   ```elixir
-  defp deps do
-    [
-      {:entity, "~> 0.1.0"}
-    ]
-  end
+
+    defp deps do
+      [
+        {:entity, "~> 0.1.0"}
+      ]
+    end
+
   ```
 
   Then, to install it, you will run this command:
@@ -41,6 +43,7 @@ defmodule Entity do
   ```
 
   To start off with, we'll need to include `Entity` in our existing Phoenix Schema like the following:
+
   ```elixir
 
     defmodule MyApp.Person do
@@ -67,6 +70,7 @@ defmodule Entity do
   which accepts an schema of attributes, creates, and inserts it into the database.
   The newly created schema will be returned by the create function.
 
+  ```elixir
   iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
   {:ok,
   %Person{
@@ -76,6 +80,7 @@ defmodule Entity do
     last_name: "Turner",
     age: 3
   }}
+  ```
 
   ## Reading methods
 
@@ -96,6 +101,8 @@ defmodule Entity do
   ### The `all/0` function to return all table entries
 
   Retrieves all database entries from a schema module
+
+  ```elixir
 
   iex> Person.all()
       [
@@ -122,9 +129,10 @@ defmodule Entity do
         }
       ]
 
+  ```
   ### The `take/1` function to return x number of records
 
-  ```Elixir
+  ```elixir
 
   iex> Person.take(2)
     [
@@ -143,6 +151,7 @@ defmodule Entity do
       age: 8
     }
   ]
+
   ```
 
   ### The `first/0` function to return the first table entry
@@ -154,6 +163,7 @@ defmodule Entity do
 
   ### Updates a table record by ID
 
+  ```elixir
     iex> Person.update(1, %{first_name: "Kamaro"})
     iex> {:ok,
           %Person{
@@ -164,8 +174,11 @@ defmodule Entity do
             age: 7
           }}
 
+  ```
 
   ### Updates entity by its schema
+
+  ```elixir
 
   iex(1)> person = Person.find(1)
   %Person{
@@ -184,6 +197,40 @@ defmodule Entity do
       last_name: "Ok 2",
       age: 7
     }}
+  ```
+
+  ## The `delete/1` and `destroy/` functions
+
+  #### `delete`
+
+  ```elixir
+  iex(2)> Person.delete(7)
+      {:ok,
+      %Person{
+        __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+        id: 7,
+        first_name: "Glover",
+        last_name: "Schimmel",
+        age: 2
+      }}
+  ```
+
+  #### `destroy`
+
+  ```elixir
+
+  iex(3)> Person.destroy(2)
+  {:ok,
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+    id: 2,
+    first_name: "Ruecker",
+    last_name: "Lemke",
+    age: 0
+  }}
+
+  ```
+
   """
   defmacro __using__(_) do
     quote do
