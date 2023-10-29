@@ -44,7 +44,7 @@ defmodule Entity.MixProject do
 
   defp docs do
     [
-      main: "Entity",
+      main: "readme",
       extras: ["README.md"]
     ]
   end
