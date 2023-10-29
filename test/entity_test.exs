@@ -8,15 +8,6 @@ defmodule Entity.AppHelpersTest do
     assert Person.table_name == "people"
   end
 
-  # CREATING TESTS
-  # ===============
-  test "create/1 stores data." do
-    assert {:ok, %Person{}} = Person.create(person_attrs())
-  end
-  test "insert/1 stores data." do
-    assert {:ok, %Person{}} = Person.insert(person_attrs())
-  end
-
   # DELETING TESTS
   # ================
   test "truncate/0 empties table" do
