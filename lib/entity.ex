@@ -11,7 +11,23 @@ defmodule Entity do
 
   The goal of this package is to make it deadly simple to interact with Ecto without having to necessary write custom CRUD operations.
 
-  ## Updates
+  ## The `create/1` and `insert/1` function
+  You can use `create` or `insert` stores a new data entry. Schema module must have changeset method implementedUse the create method,
+  which accepts an schema of attributes, creates, and inserts it into the database.
+  The newly created schema will be returned by the create function.
+
+  iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
+  {:ok,
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 125,
+    first_name: "Hand",
+    last_name: "Turner",
+    age: 3
+  }}
+
+
+  ## The `update/2` function
 
   ### Updates a table record by ID
 
