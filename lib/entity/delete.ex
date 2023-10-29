@@ -1,5 +1,4 @@
 defmodule Entity.Delete do
-  import Ecto.Query
   import Entity.Helpers, only: [get_repo: 0]
   use Entity.Read, only: [find!: 1]
 

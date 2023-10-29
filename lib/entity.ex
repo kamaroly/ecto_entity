@@ -126,7 +126,7 @@ defmodule Entity do
 
   ```Elixir
 
-  iex>  Person.take(2)
+  iex> Person.take(2)
     [
     %Person{
       __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
