@@ -1,57 +1,267 @@
 # Entity
 
-**TODO: Add description**
 
+## Introduction
+
+The missing Elixir Phoenix package to achieve Ecto > 80% common operations with < 20% effort.
+
+Inspired by Laravel/ Php Eloquent package, Entity includes injectable functions that makes it enjoyable to interact with your database.
+When using Entity, each database table has a corresponding Schema(Model) that is used to interact with that table.
+In addition to retrieving records from the database table, Entity allows you to insert, update, and delete records from the table as well.
+
+The goal of this package is to make it deadly simple to interact with Ecto without having to necessary write custom CRUD operations.
+
+## Getting Started
+This guide is an introduction to Entity, the missing Phoenix Ecto package to achieve +80% of common operations
+less than 20% of effort it would normally take.
+Entity provides a standardized API and a set of abstractions for interacting with database tables, so that your phoenix Elixir developers
+can focus on what's specific to your project.
+
+In this guide, we're going to learn some basics about Entity, such as creating,
+reading, updating and destroying records from a database. If you want
+to see the code from this guide, you can view it [at kamaroly/ecto_entity on GitHub](https://github.com/kamaroly/ecto_entity).
+
+**This guide will require you to have setup Entity beforehand.**
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `entity` to your list of dependencies in `mix.exs`:
+To add Entity to your application, The first step is to add Entity to your `mix.exs` file,
+which we'll do by changing the `deps` definition in that file to this:
 
 ```elixir
-def deps do
-  [
-    {:entity, "~> 0.1.0"}
-  ]
-end
+
+  defp deps do
+    [
+      {:entity, "~> 0.1.0"}
+    ]
+  end
+
 ```
-# PHASE 1 IMPLEMENTATION
 
-| No  | Method              | Code Status | Test Status |
-| --- | ------------------- | --------------------- | ----------- |
-| 1   | all/0               | DONE                  | PENDING     |
-| 2   | all!/0              | DONE                  | PENDING     |
-| 3   | get/0               | DONE                  | PENDING     |
-| 4   | get!/0              | DONE                  | PENDING     |
-| 5   | take/1              | DONE                  | PENDING     |
-| 6   | take!/1             | DONE                  | PENDING     |
-| 7   | first               | DONE                  | DONE        |
-| 8   | first!              | DONE                  | DONE        |
-| 9   | last                | DONE                  | DONE        |
-| 10  | last!               | DONE                  | DONE        |
-| 11  | find/1              | DONE                  | PENDING     |
-| 12  | find!/1             | DONE                  | PENDING     |
-| 13  | create/1            | DONE                  | PENDING     |
-| 14  | create!/1           | DONE                  | DONE        |
-| 15  | insert/1            | DONE                  | DONE        |
-| 16  | insert!/1           | DONE                  | PENDING     |
-| 17  | update/2            | DONE                  | PENDING     |
-| 18  | update!/2           | DONE                  | PENDING     |
-| 19  | first_or_create/2   | DONE                  | PENDING     |
-| 20  | update_or_create/2  | DONE                  | PENDING     |
-| 21  | count/0             | DONE                  | PENDING     |
-| 22  | size/0              | DONE                  | PENDING     |
-| 23  | destroy/1           | DONE                  | PENDING     |
-| 24  | order_by/2          | DONE                  | PENDING     |
-| 25  | with/1              | DONE                  | PENDING     |
-| 26  | where/2             | DONE                  | PENDING     |
-| 27  | where_has/2         | PENDING               | PENDING     |
-| 28  | or_where/2          | PENDING               | PENDING     |
-| 29  | table_name/0        | DONE                  | PENDING     |
-| 30  | truncate/0          | DONE                  | PENDING     |
-| 31  | get_repo/0          | DONE                  | PENDING     |
+Then, to install it, you will run this command:
+
+```
+mix deps.get
+```
+
+To start off with, we'll need to include `Entity` in our existing Phoenix Schema using `use Entity` in your Schema module, like the following:
+
+```elixir
+
+  defmodule MyApp.Person do
+    import Ecto.Changeset
+    use Ecto.Schema
+    use Entity # Include Entity in your normal schema
+
+    schema "people" do
+      field :first_name, :string
+      field :last_name, :string
+      field :age, :integer
+    end
+
+    def changeset(entity, attrs) do
+      entity
+      |> cast(attrs, [:first_name, :last_name])
+      |> validate_required([:first_name, :last_name])
+    end
+  end
+```
+
+## Create
+
+`create/1` and `insert/1` can be used to stores create table entry. 
+Schema module must have changeset method implementedUse the create method, which accepts an schema of attributes, creates, and inserts it into the database.
+
+The newly created schema will be returned by the create function.
+
+```elixir
+iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
+{:ok,
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+  id: 125,
+  first_name: "Hand",
+  last_name: "Turner",
+  age: 3
+}}
+```
+
+## Read
+
+### `find/1` 
+
+Returns entry with id matching what passed
+
+```elixir
+
+  iex> Person.find(5)
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 5,
+    first_name: "Kristopher",
+    last_name: "Keeling",
+    age: 9
+  }
+```
+
+### `all/0` 
+
+Returns all database entries from a schema module
+
+```elixir
+
+iex> Person.all()
+    [
+      %Person{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+        id: 1,
+        first_name: "German",
+        last_name: "OConnell",
+        age: 2
+      },
+      %Person{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+        id: 2,
+        first_name: "Fritsch",
+        last_name: "Kassulke",
+        age: 8
+      },
+      %Person{
+        __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+        id: 3,
+        first_name: "Russel",
+        last_name: "Collins",
+        age: 3
+      }
+    ]
+
+```
+### `take/1` 
+
+Returns x number of records
+
+```elixir
+
+iex> Person.take(2)
+  [
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 1,
+    first_name: "German",
+    last_name: "OConnell",
+    age: 2
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 2,
+    first_name: "Fritsch",
+    last_name: "Kassulke",
+    age: 8
+  }
+]
+
+```
+
+### `first/0` 
+
+Returns the first table entry
+
+### `last/0` 
+
+Returns the last table entry
 
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/entity>.
+## Update 
 
+Updates an existing entry
+### `update/2`
+
+Updates an existing record identified by an ID
+
+```elixir
+  iex> Person.update(1, %{first_name: "Kamaro"})
+  iex> {:ok,
+        %Person{
+          __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+          id: 1,
+          first_name: "Kamaro",
+          last_name: "Yundt",
+          age: 7
+        }}
+
+```
+
+#### `updates/2` 
+
+Updates an existing record identified by its Schema(Model)
+
+```elixir
+
+iex(1)> person = Person.find(1)
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+  id: 1,
+  first_name: "Weber",
+  last_name: "Ok 2",
+  age: 7
+}
+iex(2)> Person.update(person, %{first_name: "Kamaro"})
+  {:ok,
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 1,
+    first_name: "Kamaro",
+    last_name: "Ok 2",
+    age: 7
+  }}
+```
+
+## Delete
+
+#### `delete/1`
+
+You may use `delete/1` or `destroy/1` to delete an existing table entry identifies by its ID.
+
+```elixir
+iex(2)> Person.delete(7)
+    {:ok,
+    %Person{
+      __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+      id: 7,
+      first_name: "Glover",
+      last_name: "Schimmel",
+      age: 2
+    }}
+```
+
+#### `destroy/1`
+
+```elixir
+
+iex(3)> Person.destroy(2)
+{:ok,
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+  id: 2,
+  first_name: "Ruecker",
+  last_name: "Lemke",
+  age: 0
+}}
+
+```
+#### `truncate`
+
+You may truncate a database table by `truncate/0`. `truncate` delete all entries and reset the table index.
+
+```elixir
+iex(1)> Person.truncate()
+{:ok,
+ %MyXQL.Result{
+   columns: nil,
+   connection_id: 788,
+   last_insert_id: 0,
+   num_rows: 0,
+   rows: nil,
+   num_warnings: 0
+ }}
+iex(2)>
+
+```

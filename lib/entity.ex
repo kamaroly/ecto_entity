@@ -1,6 +1,8 @@
 defmodule Entity do
   @moduledoc """
 
+  # Entity
+
   The missing Elixir Phoenix package to achieve Ecto > 80% common operations with < 20% effort.
 
   # Introduction
