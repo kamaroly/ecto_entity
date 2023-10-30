@@ -1,9 +1,9 @@
 import Config
 
 config :entity, Entity.Repo,
-  database: System.get_env("DATABASE_NAME", "test"),
+  database: System.get_env("DATABASE_NAME", "entity"),
   username: System.get_env("DATABASE_USERNAME", "root"),
-  password: System.get_env("DATABASE_PASSWORD", ""),
+  password: System.get_env("DATABASE_PASSWORD", "root"),
   hostname: System.get_env("DATABASE_HOST_NAME", "localhost"),
   port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
 
