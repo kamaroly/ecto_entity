@@ -35,7 +35,7 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - uses: mirromutth/mysql-action@v1.1
       with:
-        mysql user: 'developer'
+        mysql user: 'root'
         mysql password: 'test'
     - name: Install dependencies
       run: mix deps.get
