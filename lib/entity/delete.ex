@@ -6,7 +6,7 @@ defmodule Entity.Delete do
     quote do
       @doc """
       Get the table name for this schema
-
+      
       ## Example
           iex> Person.table_name
           iex> "people"
@@ -15,7 +15,7 @@ defmodule Entity.Delete do
 
       @doc """
       Truncates a table and reset its index
-
+      
       ## Example
         iex> Person.truncate
         iex> {:ok,
@@ -33,26 +33,25 @@ defmodule Entity.Delete do
       end
 
       @doc """
-        Deletes the a database entry from a schema module
+      Deletes the a database entry from a schema module
+      
+      ## Examples
+      
+          iex> Person.delete(31)
+          iex> {:ok,
+            %Person{
+              __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+              id: 31,
+              first_name: "Roman",
+              last_name: "Haag",
+              age: nil
+            }}
+      
+      """
+      def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
+      def destroy(entity) when is_map(entity), do: destroy(entity.id)
 
-        ## Examples
-
-            iex> Person.delete(31)
-            iex> {:ok,
-              %Person{
-                __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
-                id: 31,
-                first_name: "Roman",
-                last_name: "Haag",
-                age: nil
-              }}
-
-        """
-        def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
-        def destroy(entity) when is_map(entity), do: destroy(entity.id)
-
-        def delete(entity), do: destroy(entity)
-
-      end
+      def delete(entity), do: destroy(entity)
     end
+  end
 end

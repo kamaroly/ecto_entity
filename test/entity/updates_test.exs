@@ -4,8 +4,7 @@ defmodule Entity.UpdateTest do
 
   alias Person
 
-
-   # UPDATES & Record Modifications
+  # UPDATES & Record Modifications
   test "update/2 updates a specific table record" do
     seed_people(13)
 
@@ -27,7 +26,7 @@ defmodule Entity.UpdateTest do
 
     old_person = Person.first()
 
-    person_attr = %{first_name: Faker.first_name, last_name: Faker.last_name}
+    person_attr = %{first_name: Faker.first_name(), last_name: Faker.last_name()}
 
     new_person = Person.update(old_person, person_attr)
 

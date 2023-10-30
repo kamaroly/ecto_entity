@@ -14,7 +14,8 @@ defmodule Entity.MixProject do
       package: package(),
       docs: docs(),
       source_url: "https://github.com/kamaroly/ecto_entity",
-      description: "An Elixir Ecto Package to Boost Your Productivity and Achieve 90% throughput in Just 10% of the Time."
+      description:
+        "An Elixir Ecto Package to Boost Your Productivity and Achieve 90% throughput in Just 10% of the Time."
     ]
   end
 
@@ -38,7 +39,7 @@ defmodule Entity.MixProject do
 
   defp aliases do
     [
-      test: ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      test: ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
 
@@ -49,7 +50,7 @@ defmodule Entity.MixProject do
     ]
   end
 
-   defp package() do
+  defp package() do
     [
       name: "Entity",
       # These are the default files included in the package

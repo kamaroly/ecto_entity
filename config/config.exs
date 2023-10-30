@@ -8,4 +8,4 @@ config :entity, Entity.Repo,
   port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
 
 config :entity,
-      ecto_repos: [Entity.Repo]
+  ecto_repos: [Entity.Repo]

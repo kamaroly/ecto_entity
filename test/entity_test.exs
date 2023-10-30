@@ -5,7 +5,7 @@ defmodule Entity.AppHelpersTest do
 
   # HELPERS
   test "table_name/0 returns table name" do
-    assert Person.table_name == "people"
+    assert Person.table_name() == "people"
   end
 
   # DELETING TESTS
@@ -21,10 +21,12 @@ defmodule Entity.AppHelpersTest do
   # =============
   test "first/0 returns first records" do
     seed_people(10)
-    assert Person.first.id == 1
+    assert Person.first().id == 1
   end
+
   test "first!/1 raises Ecto.NoResultsError for non-existing entity" do
     Person.truncate()
+
     assert_raise Ecto.NoResultsError, fn ->
       Person.first!()
     end
@@ -35,8 +37,8 @@ defmodule Entity.AppHelpersTest do
     seed_people(2)
 
     # Assert
-    assert %Person{} = Person.last
-    assert Person.last.id > Person.first.id
+    assert %Person{} = Person.last()
+    assert Person.last().id > Person.first().id
   end
 
   test "find/1 retrieves a record by id" do
@@ -48,7 +50,7 @@ defmodule Entity.AppHelpersTest do
 
   test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
     assert_raise Ecto.NoResultsError, fn ->
-      Person.find!(1999999999)
+      Person.find!(1_999_999_999)
     end
   end
 
@@ -64,20 +66,20 @@ defmodule Entity.AppHelpersTest do
   test "take/1 returns the  first x records" do
     Person.truncate()
     seed_people(50)
-    assert 13 ==  Enum.count(Person.take(13))
+    assert 13 == Enum.count(Person.take(13))
   end
 
   test "count/0 returns a number of records in DB" do
     Person.truncate()
     seed_people(98)
 
-    assert Person.count == 98
+    assert Person.count() == 98
   end
 
   test "size/0 returns a number of table records" do
     Person.truncate()
     seed_people(20)
 
-    assert Person.size == 20
+    assert Person.size() == 20
   end
 end

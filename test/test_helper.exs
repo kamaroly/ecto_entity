@@ -5,9 +5,9 @@ defmodule Person do
   import Ecto.Changeset
 
   schema "people" do
-    field :first_name, :string
-    field :last_name, :string
-    field :age, :integer
+    field(:first_name, :string)
+    field(:last_name, :string)
+    field(:age, :integer)
   end
 
   def changeset(%Person{} = person, attrs) do
@@ -22,9 +22,9 @@ defmodule Factory do
       # TEST HELPER FUNCTIONS
       def person_attrs do
         %{
-          first_name: Faker.first_name,
-          last_name: Faker.last_name,
-          age: Faker.random_digit
+          first_name: Faker.first_name(),
+          last_name: Faker.last_name(),
+          age: Faker.random_digit()
         }
       end
 
