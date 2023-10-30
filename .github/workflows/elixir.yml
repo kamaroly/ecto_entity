@@ -45,5 +45,5 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test --env=test
-    - name: Error handling
-      continue-on-error: ${{ always() }}
+    - name: Handle Errors
+      run: echo "Error occurred, handling it..." # Add your error handling logic here
