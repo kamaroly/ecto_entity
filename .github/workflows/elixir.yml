@@ -45,5 +45,6 @@ jobs:
       run: mix deps.get
     - name: Test MySql Connection
       run: mysql -uroot -p \n
+      run: \n
     - name: Run tests
       run: mix test
