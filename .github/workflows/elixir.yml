@@ -34,7 +34,6 @@ jobs:
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
     - uses: mirromutth/mysql-action@v1.1
-    - name: Set up Mysql
       with:
         host port: 3800 # Optional, default value is 3306. The port of host
         character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
