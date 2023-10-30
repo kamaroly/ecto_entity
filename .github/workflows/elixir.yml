@@ -44,7 +44,9 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Test MySql Connection
-      run: mysql -uroot -p \n
-      run: \n
+      run: mysql -uroot -p
+           \n
+          show databases;
+
     - name: Run tests
       run: mix test
