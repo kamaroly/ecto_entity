@@ -33,14 +33,10 @@ jobs:
         path: deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
-    - uses: mirromutth/mysql-action@v1.1
+    - name: Set up mysql
+      uses: jordiprats/mysql-action@v1.1
       with:
-        host port: 3800 # Optional, default value is 3306. The port of host
-        character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-        collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-        mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-        mysql database: 'entity' # Optional, default value is "test". The specified database which will be create
-        mysql root password: '' # Required if "mysql user" is empty, default is empty. The root superuser password
+        mysql version: '8.0'    
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
