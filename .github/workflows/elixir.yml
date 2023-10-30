@@ -35,7 +35,8 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - uses: mirromutth/mysql-action@v1.1
       with:
-        mysql root password: '' # Required if "mysql user" is empty, default is empty. The root superuser password
+        mysql user: 'developer'
+        mysql password: 'test'
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
