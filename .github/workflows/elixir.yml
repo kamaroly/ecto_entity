@@ -54,3 +54,7 @@ jobs:
    
     - name: Run tests
       run: mix test
+    
+    - name: Generate Documents
+      run: mix docs
+  

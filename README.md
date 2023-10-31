@@ -42,6 +42,21 @@ Then, to install it, you will run this command:
 mix deps.get
 ```
 
+#### Configure Your Ecto Repo
+
+Ecto Entity needs to know what repository to use while running database query. To do that, add `config :entity, app_name: :your_app_name` to your config/config.exs file. 
+`:your_app_name` will be often the app configured in `mix.exs` under `project` > `app`.
+
+```elixir
+import Config
+ 
+# Configure your APP name so that Ecto Entity can know
+# What Ecto Repo to use for the entity
+config :entity, app_name: :your_ecto_elixir_app_name
+
+```
+
+#### Adding Entity To Your Schema
 To start off with, we'll need to include `Entity` in our existing Phoenix Schema using `use Entity` in your Schema module, like the following:
 
 ```elixir
@@ -86,7 +101,7 @@ iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 
 ## Read
 
-### `find/1` 
+## `find/1` 
 
 Returns entry with id matching what passed
 
@@ -102,7 +117,7 @@ Returns entry with id matching what passed
   }
 ```
 
-### `all/0` 
+## `all/0` 
 
 Returns all database entries from a schema module
 
@@ -134,7 +149,7 @@ iex> Person.all()
     ]
 
 ```
-### `take/1` 
+## `take/1` 
 
 Returns x number of records
 
@@ -160,19 +175,46 @@ iex> Person.take(2)
 
 ```
 
-### `first/0` 
+## `first/0` 
 
 Returns the first table entry
 
-### `last/0` 
+```elixir
 
+iex(1)> Person.first
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+  id: 1,
+  first_name: "Johnson",
+  last_name: "Bradtke",
+  age: 4
+}
+iex(2)>
+```
+
+## `last/0` 
 Returns the last table entry
 
+```elixir
 
-## Update 
+iex(1)> Person.last
+
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+  id: 36,
+  first_name: "Cedrick",
+  last_name: "Donnelly",
+  age: 2
+}
+iex(2)>
+
+```
+
+
+# UPDATE 
 
 Updates an existing entry
-### `update/2`
+## `update/2`
 
 Updates an existing record identified by an ID
 
@@ -189,7 +231,7 @@ Updates an existing record identified by an ID
 
 ```
 
-#### `updates/2` 
+## `updates/2` 
 
 Updates an existing record identified by its Schema(Model)
 
@@ -214,7 +256,7 @@ iex(2)> Person.update(person, %{first_name: "Kamaro"})
   }}
 ```
 
-## Delete
+# DELETE
 
 #### `delete/1`
 
