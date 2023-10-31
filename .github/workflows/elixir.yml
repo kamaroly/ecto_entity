@@ -57,3 +57,5 @@ jobs:
       continue-on-error: true
     - name: Run tests
       run: iex -S mix test
+    - name: Fetch Person
+      run: Person.all()
