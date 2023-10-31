@@ -56,11 +56,9 @@ jobs:
     - name: Install dependencies and Test installation
       run: |
           mix deps.get
-          iex -S mix
-          Faker.first_name
+          iex -S mix 
           
     - name: Run tests
       run: |
          mix --version
          mix test
-         Person.all
