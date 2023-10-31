@@ -7,8 +7,6 @@ config :entity, Entity.Repo,
   hostname: System.get_env("DATABASE_HOST_NAME", "127.0.0.1"),
   port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
 
-config :entity,
-  ecto_repos: [Entity.Repo]
+config :entity, ecto_repos: [Entity.Repo]
 
-config :entity,
-  pubsub_server: Entity.PubSub
+config :entity, pubsub_server: Entity.PubSub
