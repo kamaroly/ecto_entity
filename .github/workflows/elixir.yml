@@ -41,18 +41,14 @@ jobs:
       with:
         elixir-version: '1.15.2' # Define the Elixir version
         otp-version: '26.0'      # Define the Erlang/OTP version
+        
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
         path: deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
-    - name: Debug MySQL Connection
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y netcat
-        nc -vz ${{ env.DATABASE_HOST }} 3306
-        
+
     - name: Install dependencies
       run: mix deps.get
    
