@@ -8,7 +8,7 @@ env:
     DATABASE_NAME: entity_db
     DATABASE_USERNAME: test_user
     DATABASE_PASSWORD: password
-    DATABASE_HOST_NAME: "127.0.0.1"
+    DATABASE_HOST_NAME: "mysql-master" 
 
 on:
   push:
@@ -58,6 +58,6 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Telnet the port of mysql
-      run: telnet 127.0.0.1 3306
+      run: telnet DATABASE_HOST_NAME 3306
     - name: Run tests
       run: mix test
