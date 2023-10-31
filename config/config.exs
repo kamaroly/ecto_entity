@@ -9,3 +9,6 @@ config :entity, Entity.Repo,
 
 config :entity,
   ecto_repos: [Entity.Repo]
+
+config :entity,
+  pubsub_server: Entity.PubSub
