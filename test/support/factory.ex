@@ -12,7 +12,7 @@ defmodule Entity.Factory do
 
       def seed_people(count \\ 1) do
         1..count
-        |> Enum.each(fn _ -> Person.insert(person_attrs()) end)
+        |> Enum.each(fn _ -> Entity.Person.insert(person_attrs()) end)
       end
     end
   end
