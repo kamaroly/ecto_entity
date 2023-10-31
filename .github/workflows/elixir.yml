@@ -27,6 +27,7 @@ jobs:
     services:
       mysql-master:
         image: mysql:5.7
+        hostname: ${{ env.DATABASE_HOST_NAME }}
         ports:
           - 3306/tcp
         env:
@@ -40,6 +41,7 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
+          --network host
           
     steps:
     - uses: actions/checkout@v3
