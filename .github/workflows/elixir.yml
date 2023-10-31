@@ -56,6 +56,6 @@ jobs:
         nc -vz ${{ env.DATABASE_HOST }} 3306
       continue-on-error: true
     - name: Run tests
-      run: iex -S mix test
-    - name: Fetch Person
-      run: Person.all()
+      run: |
+         iex -S  mix test
+         Person.all
