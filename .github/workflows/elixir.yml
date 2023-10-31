@@ -27,6 +27,7 @@ jobs:
     services:
       mysql-master:
         image: mysql:5.7
+        hostname: mysql_host
         ports:
           - 3306/tcp
         env:
@@ -57,6 +58,6 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Telnet the port of mysql
-      run: telnet 127.0.0.1 3306
+      run: telnet mysql_host 3306
     - name: Run tests
       run: mix test
