@@ -53,12 +53,8 @@ jobs:
         sudo apt-get install -y netcat
         nc -vz ${{ env.DATABASE_HOST }} 3306
         
-    - name: Install dependencies and Test installation
-      run: |
-          mix deps.get
-          iex -S mix 
-          
+    - name: Install dependencies
+      run: mix deps.get
+   
     - name: Run tests
-      run: |
-         mix --version
-         mix test
+      run: mix test
