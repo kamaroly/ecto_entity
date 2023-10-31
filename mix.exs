@@ -15,7 +15,9 @@ defmodule Entity.MixProject do
       docs: docs(),
       source_url: "https://github.com/kamaroly/ecto_entity",
       description:
-        "An Elixir Ecto Package to Boost Your Productivity and Achieve 90% throughput in Just 10% of the Time."
+        "An Elixir Ecto Package to Boost Your Productivity and Achieve 90% throughput in Just 10% of the Time.",
+
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -59,4 +61,9 @@ defmodule Entity.MixProject do
       links: %{"GitHub" => "https://github.com/kamaroly/ecto_entity"}
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
 end
