@@ -1,7 +1,7 @@
 defmodule Entity.CreateTests do
   use ExUnit.Case
   use Factory
-  alias Person
+  alias Entity.Person
 
   # CREATING TESTS
   # ===============
