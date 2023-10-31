@@ -1,6 +1,6 @@
-defmodule Entity.AppHelpersTest do
+defmodule Entity.EntityTest do
   use ExUnit.Case
-  use Factory
+  use Entity.Factory
   alias Entity.Person
 
   # HELPERS

@@ -1,7 +1,6 @@
 defmodule Entity.UpdateTest do
   use ExUnit.Case
-  use Factory
-
+  use Entity.Factory
   alias Entity.Person
 
   # UPDATES & Record Modifications
