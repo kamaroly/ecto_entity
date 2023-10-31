@@ -8,7 +8,7 @@ env:
     DATABASE_NAME: entity_db
     DATABASE_USERNAME: test_user
     DATABASE_PASSWORD: password
-    DATABASE_HOST_NAME: "mysql-master" 
+    DATABASE_HOST_NAME: mysql-master
 
 on:
   push:
