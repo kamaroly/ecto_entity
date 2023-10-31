@@ -2,13 +2,13 @@ import Config
 
 # Configure your APP name so that Ecto Entity can know
 # What Ecto Repo to use for the entity
-config :entity, app_name: :entity
+config :ecto_entity, app_name: :ecto_entity
 
-config :entity, Ecto.Entity.Repo,
+config :ecto_entity, Ecto.Entity.Repo,
   database: System.get_env("DATABASE_NAME", "entity"),
   username: System.get_env("DATABASE_USERNAME", "root"),
   password: System.get_env("DATABASE_PASSWORD", ""),
   hostname: System.get_env("DATABASE_HOST_NAME", "127.0.0.1"),
   port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
 
-config :entity, ecto_repos: [Ecto.Entity.Repo]
+config :ecto_entity, ecto_repos: [Ecto.Entity.Repo]

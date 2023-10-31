@@ -2,7 +2,7 @@ defmodule Ecto.Entity.Helpers do
   @doc """
   Get the repo to use
   """
-  def app_name, do: Application.get_env(:entity, :app_name)
+  def app_name, do: Application.get_env(:ecto_entity, :app_name)
 
   def get_repo do
     Application.get_env(app_name(), :ecto_repos, [])

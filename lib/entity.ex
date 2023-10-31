@@ -32,7 +32,7 @@ defmodule Ecto.Entity do
 
     defp deps do
       [
-        {:entity, "~> 0.1.0"}
+        {:ecto_entity, "~> 0.1.0"}
       ]
     end
 

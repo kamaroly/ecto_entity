@@ -3,6 +3,6 @@ defmodule Entity.HelpersTest do
   alias Ecto.Entity.Helpers
 
   test "We can get the repo module to work with" do
-    assert Helpers.get_repo() == Entity.Repo
+    assert Helpers.get_repo() == Ecto.Entity.Repo
   end
 end
