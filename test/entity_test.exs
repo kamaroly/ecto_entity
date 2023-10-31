@@ -1,7 +1,7 @@
 defmodule Entity.EntityTest do
   use ExUnit.Case
-  use Entity.Factory
-  alias Entity.Person
+  use Support.Factory
+  alias Support.Person
 
   # HELPERS
   test "table_name/0 returns table name" do

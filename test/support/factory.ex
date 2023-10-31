@@ -1,4 +1,4 @@
-defmodule Entity.Factory do
+defmodule Support.Factory do
   defmacro __using__(_) do
     quote do
       # TEST HELPER FUNCTIONS
@@ -12,7 +12,7 @@ defmodule Entity.Factory do
 
       def seed_people(count \\ 1) do
         1..count
-        |> Enum.each(fn _ -> Entity.Person.insert(person_attrs()) end)
+        |> Enum.each(fn _ -> Support.Person.insert(person_attrs()) end)
       end
     end
   end

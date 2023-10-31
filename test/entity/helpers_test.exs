@@ -1,4 +1,4 @@
-defmodule EntityTest do
+defmodule Entity.HelpersTest do
   use ExUnit.Case
   alias Entity.Helpers
 
