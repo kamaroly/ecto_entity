@@ -1,5 +1,9 @@
 import Config
 
+# Configure your APP name so that Ecto Entity can know
+# What Ecto Repo to use for the entity
+config :entity, app_name: :entity
+
 config :entity, Entity.Repo,
   database: System.get_env("DATABASE_NAME", "entity"),
   username: System.get_env("DATABASE_USERNAME", "root"),
@@ -8,5 +12,3 @@ config :entity, Entity.Repo,
   port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
 
 config :entity, ecto_repos: [Entity.Repo]
-
-config :entity, pubsub_server: Entity.PubSub
