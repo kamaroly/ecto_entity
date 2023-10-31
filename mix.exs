@@ -3,7 +3,7 @@ defmodule Entity.MixProject do
 
   def project do
     [
-      app: :entity,
+      app: :ecto_entity,
       version: "0.1.1",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -24,7 +24,7 @@ defmodule Entity.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Entity.Application, []}
+      mod: {Ecto.Entity.Application, []}
     ]
   end
 
@@ -53,7 +53,7 @@ defmodule Entity.MixProject do
 
   defp package() do
     [
-      name: "entity",
+      name: "ecto_entity",
       # These are the default files included in the package
       files: ~w(lib mix.exs doc README* test),
       licenses: ["MIT"],

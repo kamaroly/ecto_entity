@@ -1,12 +1,12 @@
-defmodule Entity.Delete do
-  import Entity.Helpers, only: [get_repo: 0]
-  use Entity.Read, only: [find!: 1]
+defmodule Ecto.Entity.Delete do
+  import Ecto.Entity.Helpers, only: [get_repo: 0]
+  use Ecto.Entity.Read, only: [find!: 1]
 
   defmacro __using__(_) do
     quote do
       @doc """
       Get the table name for this schema
-      
+
       ## Example
           iex> Person.table_name
           iex> "people"
@@ -15,7 +15,7 @@ defmodule Entity.Delete do
 
       @doc """
       Truncates a table and reset its index
-      
+
       ## Example
         iex> Person.truncate
         iex> {:ok,
@@ -34,9 +34,9 @@ defmodule Entity.Delete do
 
       @doc """
       Deletes the a database entry from a schema module
-      
+
       ## Examples
-      
+
           iex> Person.delete(31)
           iex> {:ok,
             %Person{
@@ -46,7 +46,7 @@ defmodule Entity.Delete do
               last_name: "Haag",
               age: nil
             }}
-      
+
       """
       def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
       def destroy(entity) when is_map(entity), do: destroy(entity.id)

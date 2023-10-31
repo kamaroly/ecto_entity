@@ -1,6 +1,6 @@
-defmodule Entity.Association do
-  import Entity.Helpers, only: [get_repo: 0]
-  use Entity.Read, only: [all: 0]
+defmodule Ecto.Entity.Association do
+  import Ecto.Entity.Helpers, only: [get_repo: 0]
+  use Ecto.Entity.Read, only: [all: 0]
 
   defmacro __using__(_) do
     quote do

@@ -1,4 +1,4 @@
-defmodule Entity.Helpers do
+defmodule Ecto.Entity.Helpers do
   @doc """
   Get the repo to use
   """

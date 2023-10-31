@@ -1,28 +1,28 @@
-# Entity
+# Ecto Entity
 
 
-## Introduction
+# Introduction
 
 The missing Elixir Phoenix package to achieve Ecto > 80% common operations with < 20% effort.
 
-Inspired by Laravel/ Php Eloquent package, Entity includes injectable functions that makes it enjoyable to interact with your database.
-When using Entity, each database table has a corresponding Schema(Model) that is used to interact with that table.
-In addition to retrieving records from the database table, Entity allows you to insert, update, and delete records from the table as well.
+Inspired by Laravel/ Php Eloquent package, Ecto Entity includes injectable functions that makes it enjoyable to interact with your database.
+When using Ecto Entity, each database table has a corresponding Schema(Model) that is used to interact with that table.
+In addition to retrieving records from the database table, Ecto Entity allows you to insert, update, and delete records from the table as well.
 
 The goal of this package is to make it deadly simple to interact with Ecto without having to necessary write custom CRUD operations.
 
-## Getting Started
-This guide is an introduction to Entity, the missing Phoenix Ecto package to achieve +80% of common operations
+# Getting Started
+This guide is an introduction to Ecto Entity, the missing Phoenix Ecto package to achieve +80% of common operations
 less than 20% of effort it would normally take.
-Entity provides a standardized API and a set of abstractions for interacting with database tables, so that your phoenix Elixir developers
+Ecto Entity provides a standardized API and a set of abstractions for interacting with database tables, so that your phoenix Elixir developers
 can focus on what's specific to your project.
 
-In this guide, we're going to learn some basics about Entity, such as creating,
+In this guide, we're going to learn some basics about Ecto Entity, such as creating,
 reading, updating and destroying records from a database. If you want
 to see the code from this guide, you can view it [at kamaroly/ecto_entity on GitHub](https://github.com/kamaroly/ecto_entity).
 
 **This guide will require you to have setup Entity beforehand.**
-### Installation
+# Installation
 To add Entity to your application, The first step is to add Entity to your `mix.exs` file,
 which we'll do by changing the `deps` definition in that file to this:
 
@@ -42,9 +42,9 @@ Then, to install it, you will run this command:
 mix deps.get
 ```
 
-#### Configure Your Ecto Repo
+## Configure Your Ecto Repo
 
-Ecto Entity needs to know what repository to use while running database query. To do that, add `config :entity, app_name: :your_app_name` to your config/config.exs file. 
+Ecto Entity needs to know what repository to use while running database query. To do that, add `config :entity, app_name: :your_app_name` to your `config/config.exs` file. 
 `:your_app_name` will be often the app configured in `mix.exs` under `project` > `app`.
 
 ```elixir
@@ -56,15 +56,15 @@ config :entity, app_name: :your_ecto_elixir_app_name
 
 ```
 
-#### Adding Entity To Your Schema
-To start off with, we'll need to include `Entity` in our existing Phoenix Schema using `use Entity` in your Schema module, like the following:
+## Adding Entity To Your Schema
+To start off with, we'll need to include `Entity` in our existing Phoenix Schema using `use Ecto.Entity` in your Schema module, like the following:
 
 ```elixir
 
   defmodule MyApp.Person do
     import Ecto.Changeset
     use Ecto.Schema
-    use Entity # Include Entity in your normal schema
+    use Ecto.Entity # Include Entity in your normal schema
 
     schema "people" do
       field :first_name, :string
@@ -80,7 +80,7 @@ To start off with, we'll need to include `Entity` in our existing Phoenix Schema
   end
 ```
 
-## Create
+# CREATE
 
 `create/1` and `insert/1` can be used to stores create table entry. 
 Schema module must have changeset method implementedUse the create method, which accepts an schema of attributes, creates, and inserts it into the database.
@@ -99,7 +99,7 @@ iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 }}
 ```
 
-## Read
+# READ
 
 ## `find/1` 
 

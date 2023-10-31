@@ -1,4 +1,4 @@
-defmodule Entity.Repo do
+defmodule Ecto.Entity.Repo do
   use Ecto.Repo,
     otp_app: :entity,
     adapter: Ecto.Adapters.MyXQL

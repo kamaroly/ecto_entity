@@ -1,5 +1,5 @@
-defmodule Entity.Create do
-  import Entity.Helpers
+defmodule Ecto.Entity.Create do
+  import Ecto.Entity.Helpers
 
   defmacro __using__(_) do
     quote do
@@ -7,9 +7,9 @@ defmodule Entity.Create do
       Stores a new data entry. Schema module must have changeset method implementedUse the create method,
       which accepts an schema of attributes, creates, and inserts it into the database.
       The newly created schema will be returned by the create function:
-      
+
       ## Example
-      
+
       iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
       {:ok,
       %Person{

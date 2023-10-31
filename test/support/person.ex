@@ -1,5 +1,5 @@
 defmodule Person do
-  use Entity
+  use Ecto.Entity
   use Ecto.Schema
   alias __MODULE__
   import Ecto.Changeset

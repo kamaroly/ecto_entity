@@ -1,4 +1,4 @@
-defmodule Entity do
+defmodule Ecto.Entity do
   @moduledoc """
 
   # Entity
@@ -236,7 +236,7 @@ defmodule Entity do
   """
   defmacro __using__(_) do
     quote do
-      use Entity.{
+      use Ecto.Entity.{
         Create,
         Read,
         Update,
