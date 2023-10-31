@@ -30,7 +30,7 @@ which we'll do by changing the `deps` definition in that file to this:
 
   defp deps do
     [
-      {:entity, "~> 0.1.0"}
+      {:ecto_entity, "~> 0.1.0"}
     ]
   end
 
@@ -44,7 +44,7 @@ mix deps.get
 
 ## Configure Your Ecto Repo
 
-Ecto Entity needs to know what repository to use while running database query. To do that, add `config :entity, app_name: :your_app_name` to your `config/config.exs` file. 
+Ecto Entity needs to know what repository to use while running database query. To do that, add `config :ecto_entity, app_name: :your_app_name` to your `config/config.exs` file. 
 `:your_app_name` will be often the app configured in `mix.exs` under `project` > `app`.
 
 ```elixir
@@ -52,7 +52,7 @@ import Config
  
 # Configure your APP name so that Ecto Entity can know
 # What Ecto Repo to use for the entity
-config :entity, app_name: :your_ecto_elixir_app_name
+config :ecto_entity, app_name: :your_ecto_elixir_app_name
 
 ```
 
