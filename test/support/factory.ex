@@ -1,4 +1,4 @@
-defmodule Factory do
+defmodule Entity.Factory do
   defmacro __using__(_) do
     quote do
       # TEST HELPER FUNCTIONS
