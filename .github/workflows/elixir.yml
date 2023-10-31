@@ -53,10 +53,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y netcat
+        nc -vz ${{ env.DATABASE_HOST }} 3306
+        
     - name: Test installation
       run: |
           iex -S mix
-          Faker.text
+          Faker.first_name
           
     - name: Run tests
       run: |
