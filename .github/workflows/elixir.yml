@@ -33,7 +33,6 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-          --network host
           
     steps:
     - uses: actions/checkout@v2
