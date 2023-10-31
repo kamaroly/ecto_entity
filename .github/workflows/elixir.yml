@@ -53,6 +53,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y netcat
+    - name: Test installation
+      run: |
+          iex -S mix
+          Faker.text
+          
     - name: Run tests
       run: |
          mix --version
