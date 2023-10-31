@@ -1,4 +1,4 @@
-defmodule Support.Person do
+defmodule Person do
   use Entity
   use Ecto.Schema
   alias __MODULE__
