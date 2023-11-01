@@ -22,6 +22,7 @@ defmodule Entity.DeleteTests do
   end
 
   test "destroy/1 removes a record from database." do
+    Person.truncate()
     seed_people(4)
     assert {:ok, %Person{}} = Person.delete(2)
   end

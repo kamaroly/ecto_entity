@@ -37,8 +37,9 @@ defmodule Ecto.Entity.Read do
 
       """
       def first(), do: __MODULE__ |> first() |> get_repo().one()
+
       def first!(), do: __MODULE__ |> first() |> get_repo().one!()
-      def first!(query), do: query |> first() |> get_repo().one!()
+      def first!(query), do: first(query) |> get_repo().one!()
 
       @doc """
       Retrieves the last database entry from a schema module
@@ -123,6 +124,16 @@ defmodule Ecto.Entity.Read do
 
       def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id in ^ids)
       def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
+
+      def where_first(field, value) do
+         __MODULE__.where(field, value)
+         |> first()
+         |> get_repo().one()
+      end
+      def where_all(field, value) do
+        __MODULE__.where(field, value)
+        |> all()
+      end
     end
   end
 end

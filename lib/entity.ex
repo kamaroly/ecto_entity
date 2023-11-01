@@ -241,6 +241,7 @@ defmodule Ecto.Entity do
         Read,
         Update,
         Delete,
+        Conditions,
         Association
       }
     end
