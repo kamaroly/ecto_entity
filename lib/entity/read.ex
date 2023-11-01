@@ -37,7 +37,6 @@ defmodule Ecto.Entity.Read do
 
       """
       def first(), do: __MODULE__ |> first() |> get_repo().one()
-
       def first!(), do: __MODULE__ |> first() |> get_repo().one!()
       def first!(query), do: first(query) |> get_repo().one!()
 
@@ -127,13 +126,10 @@ defmodule Ecto.Entity.Read do
 
       def where_first(field, value) do
          __MODULE__.where(field, value)
-         |> first()
-         |> get_repo().one()
+         |> first() |> get_repo().one()
       end
-      def where_all(field, value) do
-        __MODULE__.where(field, value)
-        |> all()
-      end
+
+      def where_all(field, value), do: __MODULE__.where(field, value) |> all()
     end
   end
 end

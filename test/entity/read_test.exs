@@ -49,6 +49,7 @@ defmodule Entity.EntityTest do
   end
 
   test "find/1 retrieves many records when provided with array of ids" do
+    Person.truncate()
     seed_people(4)
 
     people = Person.find([3, 4])
@@ -95,7 +96,6 @@ defmodule Entity.EntityTest do
     seed_people(3)
 
     person = Person.except([1, 2])
-    dbg(person)
     assert Enum.count(person) == 1
   end
 
