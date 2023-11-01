@@ -360,7 +360,33 @@ iex(2)> Person.delete([3, 6])
 {2, nil}
 ```
 
-#### `truncate`
+### `delete_except/1`
+
+You may wish to delete entries with exception using `delete_except/` or `destroy_except/`
+
+```elixir
+iex(1)> Person.delete_except([47, 48])
+{48, nil}
+iex(2)> Person.all()
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 47,
+    first_name: "Toy",
+    last_name: "Weimann",
+    age: 3
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 48,
+    first_name: "Wilderman",
+    last_name: "Treutel",
+    age: 9
+  }
+]
+```
+
+## `truncate`
 
 You may truncate a database table by `truncate/0`. `truncate` delete all entries and reset the table index.
 

@@ -1,12 +1,13 @@
 defmodule Ecto.Entity.Update do
-  import Ecto.Entity.Helpers
-  use Ecto.Entity.Read, only: [find: 1]
-
   defmacro __using__(_) do
     quote do
+
+    import Ecto.Entity.Helpers
+    use Ecto.Entity.Read, only: [find: 1, in_ids: 1]
+
       @doc """
       Updates a table record by ID
-      
+
       ## Example
             iex> Person.update(1, %{first_name: "Kamaro"})
             iex> {:ok,

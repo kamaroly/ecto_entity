@@ -1,9 +1,10 @@
 defmodule Ecto.Entity.Association do
-  import Ecto.Entity.Helpers, only: [get_repo: 0]
-  use Ecto.Entity.Read, only: [all: 0]
 
   defmacro __using__(_) do
     quote do
+      import Ecto.Entity.Helpers, only: [get_repo: 0]
+      use Ecto.Entity.Read, only: [all: 0]
+
       # ASSOCIATIONS SECTION
       @spec load(query :: Queryable.t(), assoc :: List.t()) :: List.t()
       def load(query, assocs) when is_list(assocs) do
