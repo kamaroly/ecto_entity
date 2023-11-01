@@ -1,9 +1,10 @@
 defmodule Ecto.Entity.Read do
-  import Ecto.Query
-  import Ecto.Entity.Helpers
-
   defmacro __using__(_) do
     quote do
+
+      import Ecto.Query
+      import Ecto.Entity.Helpers
+
       @doc """
       Retrieves all database entries from a schema module
 
@@ -66,8 +67,58 @@ defmodule Ecto.Entity.Read do
           %SchemaModule{}
 
       """
+      def find(ids) when is_list(ids) do
+        from(p in __MODULE__, where: p.id  in ^ids)
+        |> all()
+      end
       def find(id), do: get_repo().get(__MODULE__, id)
       def find!(id), do: get_repo().get!(__MODULE__, id)
+
+      @doc """
+      Returns entries except the ones with ids provided
+
+      ## Examples
+        iex(1)> Person.all()
+        [
+          %Person{
+            __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+            id: 1,
+            first_name: "Hudson",
+            last_name: "Berge",
+            age: 9
+          },
+          %Person{
+            __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+            id: 2,
+            first_name: "Hamill",
+            last_name: "Wunsch",
+            age: 2
+          },
+          %Person{
+            __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+            id: 3,
+            first_name: "Alden",
+            last_name: "Kovacek",
+            age: 0
+          }
+        ]
+        iex(2)> Person.except([1, 2])
+        [
+          %Person{
+            __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+            id: 3,
+            first_name: "Alden",
+            last_name: "Kovacek",
+            age: 0
+          }
+        ]
+      """
+      def except(ids) when is_list(ids) do
+        from(p in __MODULE__, where: p.id not in ^ids)
+        |> all()
+      end
+      def except(id), do: except([id])
+
 
       def count(), do: all() |> Enum.count()
       def count(query), do: all(query) |> Enum.count()

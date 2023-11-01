@@ -48,6 +48,13 @@ defmodule Entity.EntityTest do
     assert Person.find(1).id == 1
   end
 
+  test "find/1 retrieves many records when provided with array of ids" do
+    seed_people(4)
+
+    people = Person.find([3,4])
+    assert Enum.count(people) == 2
+  end
+
   test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
     assert_raise Ecto.NoResultsError, fn ->
       Person.find!(1_999_999_999)
@@ -81,5 +88,22 @@ defmodule Entity.EntityTest do
     seed_people(20)
 
     assert Person.size() == 20
+  end
+
+  test "except/1 returns records except ones matching pro" do
+    Person.truncate()
+    seed_people(3)
+
+    person = Person.except([1,2]) |> Enum.at(0)
+    assert person == Person.find(3)
+  end
+
+  test "except/1 returns correct records when passed one identifier" do
+    Person.truncate()
+
+    seed_people(3)
+
+    people = Person.except(1)
+    assert people == Person.find([2,3])
   end
 end

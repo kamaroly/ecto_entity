@@ -99,15 +99,14 @@ iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 }}
 ```
 
-# READ
+# READ 
 
-## `find/1` 
+## `find/1`
 
 Returns entry with id matching what passed
 
 ```elixir
-
-  iex> Person.find(5)
+  iex(1)> Person.find(5)
   %Person{
     __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
     id: 5,
@@ -115,6 +114,35 @@ Returns entry with id matching what passed
     last_name: "Keeling",
     age: 9
   }
+```
+
+or find multiple entities with the provided identifiers like the following
+
+```elixir
+iex(17)> Person.find([1, 2, 3])
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 1,
+    first_name: "Graham",
+    last_name: "Jones",
+    age: 0
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 2,
+    first_name: "Murl",
+    last_name: "Hackett",
+    age: 9
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 3,
+    first_name: "Fahey",
+    last_name: "Windler",
+    age: 4
+  }
+]
 ```
 
 ## `all/0` 
@@ -149,12 +177,12 @@ iex> Person.all()
     ]
 
 ```
+
 ## `take/1` 
 
 Returns x number of records
 
 ```elixir
-
 iex> Person.take(2)
   [
   %Person{
@@ -176,12 +204,11 @@ iex> Person.take(2)
 ```
 
 ## `first/0` 
-
 Returns the first table entry
 
 ```elixir
 
-iex(1)> Person.first
+iex(1)> Person.first()
 %Person{
   __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
   id: 1,
@@ -193,11 +220,12 @@ iex(2)>
 ```
 
 ## `last/0` 
+
 Returns the last table entry
 
 ```elixir
 
-iex(1)> Person.last
+iex(1)> Person.last()
 
 %Person{
   __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
@@ -206,10 +234,70 @@ iex(1)> Person.last
   last_name: "Donnelly",
   age: 2
 }
-iex(2)>
-
 ```
 
+## `except/1` 
+
+Returns results except the records with the id provided
+
+```elixir
+iex(1)> Person.all()
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 1,
+    first_name: "Hudson",
+    last_name: "Berge",
+    age: 9
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 2,
+    first_name: "Hamill",
+    last_name: "Wunsch",
+    age: 2
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 3,
+    first_name: "Alden",
+    last_name: "Kovacek",
+    age: 0
+  }
+]
+iex(2)> Person.except([1, 2])
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 3,
+    first_name: "Alden",
+    last_name: "Kovacek",
+    age: 0
+  }
+]
+```
+
+Or provide only 1 record to exclude
+
+```elixir
+iex(1)> Person.except(1)
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 2,
+    first_name: "Hamill",
+    last_name: "Wunsch",
+    age: 2
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 3,
+    first_name: "Alden",
+    last_name: "Kovacek",
+    age: 0
+  }
+]
+```
 
 # UPDATE 
 
