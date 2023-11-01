@@ -1,5 +1,5 @@
 defmodule Ecto.Entity.Delete do
-  import Ecto.Entity.Helpers, only: [get_repo: 0]
+  import Ecto.Entity.Helpers, only: [get_repo: 0, in_ids: 1]
   use Ecto.Entity.Read, only: [find!: 1]
 
   defmacro __using__(_) do
@@ -28,9 +28,7 @@ defmodule Ecto.Entity.Delete do
               num_warnings: 0
             }}
       """
-      def truncate do
-        get_repo().query("TRUNCATE #{table_name()}", [])
-      end
+      def truncate, do: get_repo().query("TRUNCATE #{table_name()}", [])
 
       @doc """
       Deletes the a database entry from a schema module
@@ -48,6 +46,7 @@ defmodule Ecto.Entity.Delete do
             }}
 
       """
+      def destroy(ids) when is_list(ids), do: in_ids(ids) |> get_repo().delete_all()
       def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
       def destroy(entity) when is_map(entity), do: destroy(entity.id)
 

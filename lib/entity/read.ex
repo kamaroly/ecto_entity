@@ -67,10 +67,7 @@ defmodule Ecto.Entity.Read do
           %SchemaModule{}
 
       """
-      def find(ids) when is_list(ids) do
-        from(p in __MODULE__, where: p.id  in ^ids)
-        |> all()
-      end
+      def find(ids) when is_list(ids), do: in_ids(ids) |> all()
       def find(id), do: get_repo().get(__MODULE__, id)
       def find!(id), do: get_repo().get!(__MODULE__, id)
 
@@ -113,12 +110,8 @@ defmodule Ecto.Entity.Read do
           }
         ]
       """
-      def except(ids) when is_list(ids) do
-        from(p in __MODULE__, where: p.id not in ^ids)
-        |> all()
-      end
+      def except(ids) when is_list(ids), do: in_ids(ids) |> all()
       def except(id), do: except([id])
-
 
       def count(), do: all() |> Enum.count()
       def count(query), do: all(query) |> Enum.count()
@@ -128,6 +121,9 @@ defmodule Ecto.Entity.Read do
 
       def oder_by(), do: __MODULE__ |> order_by(:id)
       def oder_by(column), do: __MODULE__ |> order_by(^column)
+
+      def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id  in ^ids)
+
     end
   end
 end
