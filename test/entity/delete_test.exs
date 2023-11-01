@@ -14,11 +14,11 @@ defmodule Entity.DeleteTests do
   end
 
   test "delete/1 deletes multiple entries at once." do
-   Person.truncate()
-   seed_people(40)
+    Person.truncate()
+    seed_people(40)
 
-   assert {6, nil} = Person.delete([1,2,3,4,5,6])
-   assert Person.count() == 34
+    assert {6, nil} = Person.delete([1, 2, 3, 4, 5, 6])
+    assert Person.count() == 34
   end
 
   test "destroy/1 removes a record from database." do

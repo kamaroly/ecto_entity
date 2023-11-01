@@ -1,5 +1,6 @@
 defmodule Ecto.Entity.Helpers do
   import Ecto.Query
+
   @doc """
   Get the repo to use
   """

@@ -6,7 +6,7 @@ defmodule Ecto.Entity.Update do
     quote do
       @doc """
       Updates a table record by ID
-
+      
       ## Example
             iex> Person.update(1, %{first_name: "Kamaro"})
             iex> {:ok,

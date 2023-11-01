@@ -1,7 +1,6 @@
 defmodule Ecto.Entity.Read do
   defmacro __using__(_) do
     quote do
-
       import Ecto.Query
       import Ecto.Entity.Helpers
 
@@ -122,7 +121,7 @@ defmodule Ecto.Entity.Read do
       def oder_by(), do: __MODULE__ |> order_by(:id)
       def oder_by(column), do: __MODULE__ |> order_by(^column)
 
-      def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id  in ^ids)
+      def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id in ^ids)
       def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
     end
   end
