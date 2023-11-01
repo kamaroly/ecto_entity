@@ -26,6 +26,22 @@ defmodule Entity.DeleteTests do
     assert {:ok, %Person{}} = Person.delete(2)
   end
 
+  test "delete_except/1 deletes entries with exception." do
+    Person.truncate()
+    seed_people(4)
+
+    assert {3, nil} = Person.delete_except(4)
+    assert 4 == Person.first().id
+  end
+
+  test "delete_except/1 deletes entries with exception provided." do
+    Person.truncate()
+    seed_people(4)
+
+    assert {2, nil} = Person.delete_except([2, 3])
+    assert 2 == Person.count()
+  end
+
   test "truncate/0 truncates the entire table." do
     seed_people(20)
     assert {:ok, _} = Person.truncate()

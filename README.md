@@ -119,30 +119,7 @@ Returns entry with id matching what passed
 or find multiple entities with the provided identifiers like the following
 
 ```elixir
-iex(17)> Person.find([1, 2, 3])
-[
-  %Person{
-    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
-    id: 1,
-    first_name: "Graham",
-    last_name: "Jones",
-    age: 0
-  },
-  %Person{
-    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
-    id: 2,
-    first_name: "Murl",
-    last_name: "Hackett",
-    age: 9
-  },
-  %Person{
-    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
-    id: 3,
-    first_name: "Fahey",
-    last_name: "Windler",
-    age: 4
-  }
-]
+Person.find([1, 2, 3])
 ```
 
 ## `all/0` 
@@ -180,7 +157,7 @@ iex> Person.all()
 
 ## `take/1` 
 
-Returns x number of records
+or take a specific number of records
 
 ```elixir
 iex> Person.take(2)
@@ -220,7 +197,6 @@ iex(2)>
 ```
 
 ## `last/0` 
-
 Returns the last table entry
 
 ```elixir
@@ -362,7 +338,7 @@ iex(2)> Person.delete(7)
     }}
 ```
 
-#### `destroy/1`
+`delete/1` works the same as `destroy/1`. It's just a preference in pronunciation. 
 
 ```elixir
 
@@ -377,6 +353,13 @@ iex(3)> Person.destroy(2)
 }}
 
 ```
+You may want to delete many records at once. You can do so by passing a list of the ids like the following. When you pass a list of ids to delete or destroy, Ecto.entity return {count_of_deleted_entities, nil}
+
+```elixir
+iex(2)> Person.delete([3, 6])
+{2, nil}
+```
+
 #### `truncate`
 
 You may truncate a database table by `truncate/0`. `truncate` delete all entries and reset the table index.
@@ -392,6 +375,5 @@ iex(1)> Person.truncate()
    rows: nil,
    num_warnings: 0
  }}
-iex(2)>
 
 ```
