@@ -6,8 +6,11 @@ defmodule Entity.DeleteTests do
   # CREATING TESTS
   # ===============
   test "delete/1 deletes 1 record." do
+    Person.truncate()
     seed_people(2)
-    assert {:ok, %Person{}} = Person.delete(1)
+
+    assert {:ok, _} = Person.delete(1)
+    assert Person.count() == 1
   end
 
   test "delete/1 deletes multiple entries at once." do

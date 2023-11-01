@@ -110,7 +110,7 @@ defmodule Ecto.Entity.Read do
           }
         ]
       """
-      def except(ids) when is_list(ids), do: in_ids(ids) |> all()
+      def except(ids) when is_list(ids), do: not_in_ids(ids) |> all()
       def except(id), do: except([id])
 
       def count(), do: all() |> Enum.count()
@@ -123,7 +123,7 @@ defmodule Ecto.Entity.Read do
       def oder_by(column), do: __MODULE__ |> order_by(^column)
 
       def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id  in ^ids)
-
+      def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
     end
   end
 end
