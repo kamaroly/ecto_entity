@@ -64,7 +64,7 @@ defmodule Entity.MixProject do
       "guides/howtos/Association.md",
       "guides/howtos/Conditions.md",
       "guides/cheatsheets/CRUD.cheatmd",
-      "guides/cheatsheets/associations.cheatmd"
+      "guides/cheatsheets/Associations.cheatmd"
     ]
   end
 
