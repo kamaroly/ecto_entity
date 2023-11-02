@@ -80,7 +80,7 @@ To start off with, we'll need to include `Entity` in our existing Phoenix Schema
   end
 ```
 
-  NOTE: You must define a `changeset/2` function to create and update your schema
+> NOTE: You must define a `changeset/2` function to create and update your schema
 
 # CREATE
 

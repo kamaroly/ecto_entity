@@ -5,9 +5,10 @@ defmodule Person do
   import Ecto.Changeset
 
   schema "people" do
-    field(:first_name, :string)
-    field(:last_name, :string)
-    field(:age, :integer)
+    field :first_name, :string
+    field :last_name, :string
+    field :age, :integer
+
   end
 
   def changeset(%Person{} = person, attrs) do
