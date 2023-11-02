@@ -48,6 +48,8 @@ defmodule Ecto.Entity.Update do
         update_schema(entity, attrs)
       end
 
+      def update_many(query, attrs), do: raise "update_many/2 is yet to be implemented"
+
       @doc false
       defp update_schema(entity, attrs) do
         __MODULE__.changeset(entity, attrs)

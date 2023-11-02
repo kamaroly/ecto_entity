@@ -99,6 +99,15 @@ iex> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 }}
 ```
 
+Or you may create many entries at once by passing a list of entries to  `create_many/1`.
+
+```elixir
+Person.create_many([
+  %{first_name: "Parisian", last_name: "Beier", age: 7},
+  %{first_name: "Lang", last_name: "Emard", age: 3}
+])
+```
+
 # READ 
 
 ## `find/1`

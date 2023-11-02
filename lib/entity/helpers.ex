@@ -12,4 +12,10 @@ defmodule Ecto.Entity.Helpers do
       _ -> raise "Multiple repos are not supported right now."
     end
   end
+
+  def generate_random_uuid do
+    random_bytes = :crypto.strong_rand_bytes(16) # 16 bytes = 128 bits
+    random_uuid = Base.encode16(random_bytes, case: :lower)
+    String.replace(random_uuid, ~r/[^a-f0-9]/, "") |> String.downcase
+  end
 end

@@ -237,6 +237,7 @@ defmodule Ecto.Entity do
   defmacro __using__(_) do
     quote do
       use Ecto.Entity.{
+        Changes,
         Create,
         Read,
         Update,
