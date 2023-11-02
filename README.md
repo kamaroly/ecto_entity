@@ -30,7 +30,7 @@ which we'll do by changing the `deps` definition in that file to this:
 
   defp deps do
     [
-      {:ecto_entity, "~> 0.1.0"}
+      {:ecto_entity, "~> 0.1.1"}
     ]
   end
 
@@ -79,6 +79,8 @@ To start off with, we'll need to include `Entity` in our existing Phoenix Schema
     end
   end
 ```
+
+  NOTE: You must define a `changeset/2` function to create and update your schema
 
 # CREATE
 
