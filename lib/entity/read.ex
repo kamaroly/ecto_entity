@@ -122,7 +122,13 @@ defmodule Ecto.Entity.Read do
       def oder_by(column), do: __MODULE__ |> order_by(^column)
 
       def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id in ^ids)
+      def in_ids(id), do: __MODULE__.in_ids([id])
+
       def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
+      def not_in_ids(id), do: not_in_ids([id])
+
+      def where(field, value), do: __MODULE__.where(field, value)
+      def where(query, field, value), do: __MODULE__.where(field, value)
 
       def where_first(field, value) do
         __MODULE__.where(field, value) |> first() |> get_repo().one()

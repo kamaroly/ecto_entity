@@ -329,6 +329,14 @@ iex(2)> Person.update(person, %{first_name: "Kamaro"})
   }}
 ```
 
+You may update many entries at once using `update_many/2` like the following
+
+```elixir
+iex> query = Person.not_in_ids(1)
+iex> Person.update_many(query, [first_name: "Kamaro Paul"])
+    {:ok, %{update_all: {2, nil}}}
+```
+
 # DELETE
 
 #### `delete/1`

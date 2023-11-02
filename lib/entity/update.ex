@@ -47,7 +47,18 @@ defmodule Ecto.Entity.Update do
         update_schema(entity, attrs)
       end
 
-      def update_many(query, attrs), do: raise("update_many/2 is yet to be implemented")
+      @doc """
+      Update many entries that matches a specific query
+      
+      # Example
+        iex> Person.not_in_ids(1) |> Person.update_many([first_name: "Kamaro Paul"])
+        {:ok, %{update_all: {2, nil}}}
+      """
+      def update_many(query, attrs) do
+        Ecto.Multi.new()
+        |> Ecto.Multi.update_all(:update_all, query, set: attrs)
+        |> get_repo().transaction()
+      end
 
       @doc false
       defp update_schema(entity, attrs) do

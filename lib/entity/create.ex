@@ -24,6 +24,15 @@ defmodule Ecto.Entity.Create do
       def create(%{} = attrs), do: module_change(attrs) |> get_repo().insert()
       def insert(%{} = attrs), do: create(attrs)
 
+      @doc """
+      Create many entries at once
+
+      ## Example
+          iex> Person.create_many([
+            %{first_name: "Parisian", last_name: "Beier", age: 7},
+            %{first_name: "Lang", last_name: "Emard", age: 3}
+          ])
+      """
       def create_many(attrs) when is_list(attrs) do
         Ecto.Multi.new()
         |> Ecto.Multi.insert_all(:insert_all, __MODULE__, attrs)
