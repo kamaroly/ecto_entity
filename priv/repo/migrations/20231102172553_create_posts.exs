@@ -6,7 +6,6 @@ defmodule Ecto.Entity.Repo.Migrations.CreatePosts do
     create table(:posts) do
       add :title, :string
       add :body, :text
-      add :person_id, references(:people, on_delete: :nothing)
 
       timestamps()
     end

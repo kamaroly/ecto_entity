@@ -5,20 +5,43 @@
 Returns entry with id matching what passed
 
 ```elixir
-  iex(1)> Person.find(5)
-  %Person{
-    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
-    id: 5,
-    first_name: "Kristopher",
-    last_name: "Keeling",
-    age: 9
-  }
+iex(1)> Person.find(5)
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+  id: 5,
+  first_name: "Kristopher",
+  last_name: "Keeling",
+  age: 9
+}
 ```
 
 or find multiple entities with the provided identifiers like the following
 
 ```elixir
-Person.find([1, 2, 3])
+iex(1)> Person.find([1, 2, 3])
+[
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 1,
+    first_name: "Bruen",
+    last_name: "Sporer",
+    age: 2
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 2,
+    first_name: "Herman",
+    last_name: "Jerde",
+    age: 2
+  },
+  %Person{
+    __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
+    id: 3,
+    first_name: "Macey",
+    last_name: "Treutel",
+    age: 9
+  }
+]
 ```
 
 ## `all/0` 
@@ -26,7 +49,6 @@ Person.find([1, 2, 3])
 Returns all database entries from a schema module
 
 ```elixir
-
 iex(1)> Person.all()
 [
     %Person{
@@ -75,7 +97,6 @@ iex(1)> Person.take(2)
     age: 8
   }
 ]
-
 ```
 
 ## `first/0` 

@@ -8,7 +8,7 @@ Schema module must have changeset method implementedUse the create method, which
 The newly created schema will be returned by the create function.
 
 ```elixir
-Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
+iex(1)> Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 {:ok,
 %Person{
   __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
@@ -24,8 +24,9 @@ Person.create(%{first_name: "Hand", last_name: "Turner", age: 3})
 You may create many entries at once by passing a list of entries to  `create_many/1`.
 
 ```elixir
-Person.create_many([
+iex(1)> Person.create_many([
   %{first_name: "Parisian", last_name: "Beier", age: 7},
   %{first_name: "Lang", last_name: "Emard", age: 3}
 ])
+{:ok, %{insert_all: {2, nil}}}
 ```

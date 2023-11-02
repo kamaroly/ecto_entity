@@ -6,20 +6,19 @@ You may use `delete/1` or `destroy/1` to delete an existing table entry identifi
 
 ```elixir
 iex(1)> Person.delete(7)
-    {:ok,
-    %Person{
-      __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
-      id: 7,
-      first_name: "Glover",
-      last_name: "Schimmel",
-      age: 2
-    }}
+{:ok,
+%Person{
+  __meta__: #Ecto.Schema.Metadata<:deleted, "people">,
+  id: 7,
+  first_name: "Glover",
+  last_name: "Schimmel",
+  age: 2
+}}
 ```
 
 `delete/1` works the same as `destroy/1`. It's just a preference in pronunciation. 
 
 ```elixir
-
 iex(1)> Person.destroy(2)
 {:ok,
 %Person{
@@ -29,7 +28,6 @@ iex(1)> Person.destroy(2)
   last_name: "Lemke",
   age: 0
 }}
-
 ```
 You may want to delete many records at once. You can do so by passing a list of the ids like the following. When you pass a list of ids to delete or destroy, Ecto.entity return {count_of_deleted_entities, nil}
 

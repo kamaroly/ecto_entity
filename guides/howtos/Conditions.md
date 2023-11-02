@@ -3,13 +3,13 @@
 Conditions help you to retrieve data based on the specific conditions. You may do it using where condition.
 
 ```elixir 
-Person.where(:first_name, "Kamaro")
+iex(1)> Person.where(:first_name, "Kamaro")
 #Ecto.Query<from p0 in Person, where: p0.first_name == ^"Kamaro">
 ```
 
 You may return the first entry that matches the provided where condition like the following:
 ```elixir 
-Person.where_first(:first_name, "Dominic")
+iex(1)> Person.where_first(:first_name, "Dominic")
 %Person{
   __meta__: #Ecto.Schema.Metadata<:loaded, "people">,
   id: 42,
@@ -22,7 +22,7 @@ Person.where_first(:first_name, "Dominic")
 Or return all entries that matches a given condition like the following:
 
 ```elixir
-Person.where_all(:age, 6)                                                                 
+iex(1)> Person.where_all(:age, 6)                                                                 
 [                                                                                                      
   %Person{                                                                                             
     __meta__: #Ecto.Schema.Metadata<:loaded, "people">,                                                
