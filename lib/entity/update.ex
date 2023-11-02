@@ -1,13 +1,12 @@
 defmodule Ecto.Entity.Update do
   defmacro __using__(_) do
     quote do
-
-    import Ecto.Entity.Helpers
-    use Ecto.Entity.Read, only: [find: 1, in_ids: 1]
+      import Ecto.Entity.Helpers
+      use Ecto.Entity.Read, only: [find: 1, in_ids: 1]
 
       @doc """
       Updates a table record by ID
-
+      
       ## Example
             iex> Person.update(1, %{first_name: "Kamaro"})
             iex> {:ok,
@@ -48,7 +47,7 @@ defmodule Ecto.Entity.Update do
         update_schema(entity, attrs)
       end
 
-      def update_many(query, attrs), do: raise "update_many/2 is yet to be implemented"
+      def update_many(query, attrs), do: raise("update_many/2 is yet to be implemented")
 
       @doc false
       defp update_schema(entity, attrs) do

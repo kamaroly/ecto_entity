@@ -1,5 +1,4 @@
 defmodule Ecto.Entity.Association do
-
   defmacro __using__(_) do
     quote do
       import Ecto.Entity.Helpers, only: [get_repo: 0]
@@ -19,8 +18,8 @@ defmodule Ecto.Entity.Association do
         all() |> get_repo().preload(assocs)
       end
 
-      def has(query, relationship), do: raise "Where has will be supported in the future version"
-      def has(query, relationship), do: raise "Where has will be supported in the future version"
+      def has(query, relationship), do: raise("Where has will be supported in the future version")
+      def has(query, relationship), do: raise("Where has will be supported in the future version")
     end
   end
 end

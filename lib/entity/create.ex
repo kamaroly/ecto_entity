@@ -1,5 +1,4 @@
 defmodule Ecto.Entity.Create do
-
   defmacro __using__(_) do
     quote do
       import Ecto.Entity.Helpers
@@ -30,7 +29,8 @@ defmodule Ecto.Entity.Create do
         |> Ecto.Multi.insert_all(:insert_all, __MODULE__, attrs)
         |> get_repo().transaction()
       end
-      def insert_many(attrs) when is_list(attrs),  do: create_many(attrs)
+
+      def insert_many(attrs) when is_list(attrs), do: create_many(attrs)
     end
   end
 end

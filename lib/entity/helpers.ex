@@ -1,5 +1,4 @@
 defmodule Ecto.Entity.Helpers do
-
   @doc """
   Get the repo to use
   """
@@ -14,8 +13,9 @@ defmodule Ecto.Entity.Helpers do
   end
 
   def generate_random_uuid do
-    random_bytes = :crypto.strong_rand_bytes(16) # 16 bytes = 128 bits
+    # 16 bytes = 128 bits
+    random_bytes = :crypto.strong_rand_bytes(16)
     random_uuid = Base.encode16(random_bytes, case: :lower)
-    String.replace(random_uuid, ~r/[^a-f0-9]/, "") |> String.downcase
+    String.replace(random_uuid, ~r/[^a-f0-9]/, "") |> String.downcase()
   end
 end

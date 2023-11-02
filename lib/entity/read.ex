@@ -125,8 +125,7 @@ defmodule Ecto.Entity.Read do
       def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
 
       def where_first(field, value) do
-         __MODULE__.where(field, value)
-         |> first() |> get_repo().one()
+        __MODULE__.where(field, value) |> first() |> get_repo().one()
       end
 
       def where_all(field, value), do: __MODULE__.where(field, value) |> all()

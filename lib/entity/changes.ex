@@ -1,5 +1,4 @@
 defmodule Ecto.Entity.Changes do
-
   defmacro __using__(_) do
     quote do
       defp module_change(attrs) do
