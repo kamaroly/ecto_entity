@@ -47,7 +47,32 @@ defmodule Entity.MixProject do
   defp docs do
     [
       main: "readme",
-      extras: ["README.md"]
+      extras: extras(),
+      groups_for_extras: groups_for_extras()
+    ]
+  end
+
+  def extras() do
+    [
+      "README.md",
+      "CHANGELOG.md",
+      "guides/introduction/Getting Started.md",
+      "guides/howtos/Create.md",
+      "guides/howtos/Read.md",
+      "guides/howtos/Update.md",
+      "guides/howtos/Delete.md",
+      "guides/howtos/Association.md",
+      "guides/howtos/Conditions.md",
+      "guides/cheatsheets/crud.cheatmd",
+      "guides/cheatsheets/associations.cheatmd"
+    ]
+  end
+
+  defp groups_for_extras do
+    [
+      Introduction: ~r/guides\/introduction\/.?/,
+      "How-To's": ~r/guides\/howtos\/.?/,
+      Cheatsheets: ~r/cheatsheets\/.?/
     ]
   end
 
