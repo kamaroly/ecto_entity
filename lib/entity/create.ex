@@ -35,9 +35,9 @@ defmodule Ecto.Entity.Create do
       """
       def create_many(attrs) when is_list(attrs) do
         attrs =
-           attrs
-           |> put_inserted_at()
-           |> put_updated_at()
+          attrs
+          |> put_inserted_at()
+          |> put_updated_at()
 
         Ecto.Multi.new()
         |> Ecto.Multi.insert_all(:insert_all, __MODULE__, attrs)
@@ -45,7 +45,6 @@ defmodule Ecto.Entity.Create do
       end
 
       def insert_many(attrs) when is_list(attrs), do: create_many(attrs)
-
     end
   end
 end

@@ -121,6 +121,11 @@ defmodule Ecto.Entity.Read do
       def oder_by(), do: __MODULE__ |> order_by(:id)
       def oder_by(column), do: __MODULE__ |> order_by(^column)
 
+      def exist?(id) do
+        __MODULE__.in_ids(id)
+        |> get_repo().exists?()
+      end
+
       def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id in ^ids)
       def in_ids(id), do: __MODULE__.in_ids([id])
 

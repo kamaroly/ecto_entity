@@ -9,12 +9,12 @@ defmodule Ecto.Entity.Changes do
       end
 
       def get_struct do
-         __MODULE__.__struct__()
+        __MODULE__.__struct__()
       end
 
-      def put_inserted_at(attrs), do:  put_timestamp_column(attrs, :inserted_at)
+      def put_inserted_at(attrs), do: put_timestamp_column(attrs, :inserted_at)
 
-      def put_updated_at(attrs), do:  put_timestamp_column(attrs, :updated_at)
+      def put_updated_at(attrs), do: put_timestamp_column(attrs, :updated_at)
 
       def put_timestamp_column(attrs, column) when is_atom(column) do
         case Map.has_key?(get_struct(), column) do

@@ -19,8 +19,9 @@ defmodule Entity.CreateTests do
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()},
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()}
     ]
+
     # Expect 3 Entries
-    assert {:ok, %{insert_all: {count, nil}}} =  Person.insert_many(attrs)
+    assert {:ok, %{insert_all: {count, nil}}} = Person.insert_many(attrs)
   end
 
   test "insert_many/1 inserts multiple entries to db at once" do
@@ -31,6 +32,6 @@ defmodule Entity.CreateTests do
     ]
 
     # Insert many and return success query
-    assert {:ok, %{insert_all: {count, nil}}} =  Person.insert_many(attrs)
+    assert {:ok, %{insert_all: {count, nil}}} = Person.insert_many(attrs)
   end
 end

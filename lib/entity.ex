@@ -232,8 +232,10 @@ defmodule Ecto.Entity do
   }}
 
   ```
-
   """
+
+  use Ecto.Entity.DB
+
   defmacro __using__(_) do
     quote do
       use Ecto.Entity.{

@@ -35,6 +35,6 @@ defmodule Ecto.Entity.Helpers do
   end
 
   def put_timestamp(row, key) do
-     Map.put(row, key, get_current_time())
+    Map.put(row, key, get_current_time())
   end
 end
