@@ -18,7 +18,7 @@ which we'll do by changing the `deps` definition in that file to this:
 
   defp deps do
     [
-      {:ecto_entity, "~> 0.1.1"}
+      {:ecto_entity, "~> 0.1.3"}
     ]
   end
 
