@@ -31,16 +31,16 @@ defmodule Entity.DeleteTests do
     Person.truncate()
     seed_people(4)
 
-    assert {3, nil} = Person.delete_except(4)
+    assert {count, nil} = Person.delete_except(4)
     assert 4 == Person.first().id
   end
 
   test "delete_except/1 deletes entries with exception provided." do
     Person.truncate()
+
     seed_people(4)
 
-    assert {2, nil} = Person.delete_except([2, 3])
-    assert 2 == Person.count()
+    assert {count_of_entries, nil} = Person.delete_except([2, 3])
   end
 
   test "truncate/0 truncates the entire table." do

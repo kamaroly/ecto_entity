@@ -3,6 +3,7 @@ import Config
 # Configure your APP name so that Ecto Entity can know
 # What Ecto Repo to use for the entity
 config :ecto_entity, app_name: :ecto_entity
+config :ecto_entity, timezone: "Etc/UTC"
 
 config :ecto_entity, Ecto.Entity.Repo,
   database: System.get_env("DATABASE_NAME", "entity"),

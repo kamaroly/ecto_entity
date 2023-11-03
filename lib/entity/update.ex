@@ -6,7 +6,7 @@ defmodule Ecto.Entity.Update do
 
       @doc """
       Updates a table record by ID
-      
+
       ## Example
             iex> Person.update(1, %{first_name: "Kamaro"})
             iex> {:ok,
@@ -49,14 +49,15 @@ defmodule Ecto.Entity.Update do
 
       @doc """
       Update many entries that matches a specific query
-      
+
       # Example
         iex> Person.not_in_ids(1) |> Person.update_many([first_name: "Kamaro Paul"])
         {:ok, %{update_all: {2, nil}}}
       """
-      def update_many(query, attrs) do
+      def update_many(query, attrs) when is_list(attrs) do
+
         Ecto.Multi.new()
-        |> Ecto.Multi.update_all(:update_all, query, set: attrs)
+        |> Ecto.Multi.update_all(:update_all, query, set: put_updated_at(attrs))
         |> get_repo().transaction()
       end
 
@@ -65,6 +66,8 @@ defmodule Ecto.Entity.Update do
         __MODULE__.changeset(entity, attrs)
         |> get_repo().update!()
       end
+
+
     end
   end
 end

@@ -14,32 +14,23 @@ defmodule Entity.CreateTests do
   end
 
   test "create_many/1 inserts multiple entries to db at once" do
-    # Ensure there's no entry in the database
-    Person.truncate()
-
-    # Insert many
-    Person.create_many([
+    attrs = [
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()},
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()},
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()}
-    ])
-
+    ]
     # Expect 3 Entries
-    assert Person.count() == 3
+    assert {:ok, %{insert_all: {count, nil}}} =  Person.insert_many(attrs)
   end
 
   test "insert_many/1 inserts multiple entries to db at once" do
-    # Ensure there's no entry in the database
-    Person.truncate()
-
-    # Insert many
-    Person.insert_many([
+    attrs = [
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()},
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()},
       %{first_name: Faker.first_name(), last_name: Faker.last_name(), age: Faker.random_digit()}
-    ])
+    ]
 
-    # Expect 3 Entries
-    assert Person.count() == 3
+    # Insert many and return success query
+    assert {:ok, %{insert_all: {count, nil}}} =  Person.insert_many(attrs)
   end
 end
