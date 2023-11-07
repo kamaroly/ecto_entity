@@ -1,6 +1,6 @@
 defmodule Address do
-  use Ecto.Entity
   use Ecto.Schema
+  use Ecto.Entity
   import Ecto.Changeset
 
   schema "addresses" do

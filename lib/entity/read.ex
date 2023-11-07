@@ -21,8 +21,8 @@ defmodule Ecto.Entity.Read do
       def get(), do: all()
       def get(query), do: query |> get_repo().all()
 
-      def take(number), do: __MODULE__ |> limit(^number) |> get_repo().all()
       def take(query, number), do: query |> limit(^number) |> get_repo().all()
+      def take(number), do: __MODULE__ |> limit(^number) |> get_repo().all()
 
       @doc """
       Retrieves the first database entry from a schema module
@@ -126,20 +126,6 @@ defmodule Ecto.Entity.Read do
         |> get_repo().exists?()
       end
 
-      def in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id in ^ids)
-      def in_ids(id), do: __MODULE__.in_ids([id])
-
-      def not_in_ids(ids) when is_list(ids), do: from(p in __MODULE__, where: p.id not in ^ids)
-      def not_in_ids(id), do: not_in_ids([id])
-
-      def where(field, value), do: __MODULE__.where(field, value)
-      def where(query, field, value), do: __MODULE__.where(field, value)
-
-      def where_first(field, value) do
-        __MODULE__.where(field, value) |> first() |> get_repo().one()
-      end
-
-      def where_all(field, value), do: __MODULE__.where(field, value) |> all()
     end
   end
 end

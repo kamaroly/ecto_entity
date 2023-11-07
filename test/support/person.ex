@@ -1,7 +1,6 @@
 defmodule Person do
-  use Ecto.Entity
   use Ecto.Schema
-  alias __MODULE__
+  use Ecto.Entity
   import Ecto.Changeset
 
   @timestamps_opts [type: :naive_datetime]
@@ -15,7 +14,7 @@ defmodule Person do
     timestamps()
   end
 
-  def changeset(%Person{} = person, attrs) do
+  def changeset(person, attrs) do
     person
     |> cast(attrs, [:first_name, :last_name, :age])
   end

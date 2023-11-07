@@ -1,9 +1,6 @@
 defmodule Ecto.Entity.Create do
   defmacro __using__(_) do
     quote do
-      import Ecto.Entity.Helpers
-      use Ecto.Entity.Changes
-
       @doc """
       Stores a new data entry. Schema module must have changeset method implementedUse the create method,
       which accepts an schema of attributes, creates, and inserts it into the database.
@@ -21,7 +18,7 @@ defmodule Ecto.Entity.Create do
         age: 3
       }}
       """
-      def create(%{} = attrs), do: module_change(attrs) |> get_repo().insert()
+      def create(%{} = attrs), do: schema_change(attrs) |> get_repo().insert()
       def insert(%{} = attrs), do: create(attrs)
 
       @doc """

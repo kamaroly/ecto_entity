@@ -3,9 +3,16 @@ defmodule Ecto.Entity.Changes do
     quote do
       import Ecto.Entity.Helpers
 
-      def module_change(attrs) do
-        get_struct()
-        |> __MODULE__.changeset(attrs)
+      @doc """
+      Get the current module change
+      """
+      def schema_change(attrs) do
+
+        case __MODULE__.has_function?(:changeset, 2) do
+          true -> get_struct() |> __MODULE__.changeset(attrs)
+          _ -> raise "You must implement changeset in the #{__MODULE__} schema to perform this action"
+        end
+
       end
 
       def get_struct do

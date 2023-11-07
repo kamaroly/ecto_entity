@@ -41,6 +41,7 @@ defmodule Entity.DeleteTests do
 
   test "truncate/0 truncates the entire table." do
     seed_people(20)
+    Address.truncate()
     assert {:ok, _} = Person.truncate()
   end
 end
