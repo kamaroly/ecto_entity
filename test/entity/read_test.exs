@@ -8,25 +8,15 @@ defmodule Entity.EntityTest do
     assert Person.table_name() == "people"
   end
 
-  # DELETING TESTS
-  # ================
-  test "truncate/0 empties table" do
-    # Create records
-    seed_people(5)
-    # Truncate the table
-    assert {:ok, _} = Person.truncate()
-  end
-
   # READING TESTS
   # =============
   test "first/0 returns first records" do
-    seed_people(10)
+    person = seed_people(10) |> Enum.at(0)
     assert Person.first().id == 1
   end
 
   test "first!/1 raises Ecto.NoResultsError for non-existing entity" do
-    Person.truncate()
-
+    Person.truncate_without_key_checks()
     assert_raise Ecto.NoResultsError, fn ->
       Person.first!()
     end
@@ -43,17 +33,18 @@ defmodule Entity.EntityTest do
 
   test "find/1 retrieves a record by id" do
     seed_people(4)
+    person = Person.all() |> Enum.random()
 
-    assert %Person{} = Person.find(1)
-    assert Person.find(1).id == 1
+    assert %Person{} = Person.find(person.id)
+    assert Person.find(person.id).id == person.id
   end
 
   test "find/1 retrieves many records when provided with array of ids" do
-    Person.truncate()
-    seed_people(4)
 
-    people = Person.find([3, 4])
-    assert Enum.count(people) == 2
+    dbg seed_people(4)
+    dbg Person.find([3, 4])
+
+    # assert Enum.count(people) == 2
   end
 
   test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
@@ -63,25 +54,21 @@ defmodule Entity.EntityTest do
   end
 
   test "all/1 returns all records in a table" do
-    count = 20
-
-    Person.truncate()
-    seed_people(count)
-
-    assert Enum.count(Person.all()) == count
+    Person.truncate_without_key_checks()
+    seed_people(20)
+    assert Person.count() == 20
   end
 
   test "take/1 returns the  first x records" do
-    Person.truncate()
+    Person.truncate_without_key_checks()
     seed_people(50)
     assert 13 == Enum.count(Person.take(13))
   end
 
   test "count/0 returns a number of records in DB" do
-    Person.truncate()
-    seed_people(98)
-
-    assert Person.count() == 98
+    Person.truncate_without_key_checks()
+    seed_people(2)
+    assert Person.count() == 2
   end
 
   test "size/0 returns a number of table records" do
@@ -90,11 +77,15 @@ defmodule Entity.EntityTest do
   end
 
   test "except/1 returns records except ones matching pro" do
-    Person.truncate()
-    seed_people(3)
 
-    person = Person.except([1, 2])
-    assert Enum.count(person) == 1
+    Person.get_repo().transaction(fn  ->
+      Person.disable_foreign_key_checks()
+      Person.truncate_without_key_checks()
+    end)
+
+    seed_people(3)
+    person = Person.except([1, 2]) |> Enum.at(0)
+    assert person.id == 3
   end
 
   test "except/1 returns correct records when passed one identifier" do

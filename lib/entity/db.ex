@@ -18,8 +18,15 @@ defmodule Ecto.Entity.DB do
       num_warnings: 0
       }
       """
-      def raw(query, parameters \\ []) do
-        SQL.query!(get_repo(), query, parameters)
+      def raw(query, parameters \\ [], opts \\ []) do
+        SQL.query!(get_repo(), query, parameters, opts)
+      end
+
+      def disable_foreign_key_checks, do: set_foreign_key_checks(0)
+      def enable_foreign_key_checks, do: set_foreign_key_checks(1)
+
+      def set_foreign_key_checks(value) do
+         raw("SET FOREIGN_KEY_CHECKS = ?", [value])
       end
     end
   end

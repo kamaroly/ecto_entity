@@ -6,7 +6,7 @@ defmodule Ecto.Entity.Delete do
 
       @doc """
       Get the table name for this schema
-      
+
       ## Example
           iex> Person.table_name
           iex> "people"
@@ -15,7 +15,7 @@ defmodule Ecto.Entity.Delete do
 
       @doc """
       Truncates a table and reset its index
-      
+
       ## Example
         iex> Person.truncate
         iex> {:ok,
@@ -28,13 +28,19 @@ defmodule Ecto.Entity.Delete do
               num_warnings: 0
             }}
       """
-      def truncate, do: get_repo().query("TRUNCATE #{table_name()}", [])
+      def truncate(options \\ []), do: raw("TRUNCATE #{table_name()};")
+      def truncate_without_key_checks() do
+        get_repo().transaction(fn  ->
+          disable_foreign_key_checks()
+          truncate()
+        end)
+      end
 
       @doc """
       Deletes the a database entry from a schema module
-      
+
       ## Examples
-      
+
           iex> Person.delete(31)
           {:ok,
             %Person{
@@ -44,7 +50,7 @@ defmodule Ecto.Entity.Delete do
               last_name: "Haag",
               age: nil
             }}
-      
+
       """
       def destroy(ids) when is_list(ids), do: in_ids(ids) |> get_repo().delete_all()
       def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
@@ -52,7 +58,7 @@ defmodule Ecto.Entity.Delete do
 
       @doc """
       Delete everything except what is provided in this list
-      
+
       ## Examples
               iex> Person.destroy_except([6,4])
               {:ok,
@@ -69,6 +75,9 @@ defmodule Ecto.Entity.Delete do
 
       def delete(entity), do: destroy(entity)
       def delete_except(ids), do: destroy_except(ids)
+
+      def delete(), do: get_repo().delete_all(__MODULE__)
+
     end
   end
 end

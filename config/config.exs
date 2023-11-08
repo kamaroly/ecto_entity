@@ -10,6 +10,7 @@ config :ecto_entity, Ecto.Entity.Repo,
   username: System.get_env("DATABASE_USERNAME", "root"),
   password: System.get_env("DATABASE_PASSWORD", ""),
   hostname: System.get_env("DATABASE_HOST_NAME", "127.0.0.1"),
-  port: String.to_integer(System.get_env("DATABASE_PORT", "3306"))
+  port: String.to_integer(System.get_env("DATABASE_PORT", "3306")),
+  pool_size: 20
 
 config :ecto_entity, ecto_repos: [Ecto.Entity.Repo]
