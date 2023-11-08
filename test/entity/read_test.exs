@@ -40,11 +40,11 @@ defmodule Entity.EntityTest do
   end
 
   test "find/1 retrieves many records when provided with array of ids" do
+    Person.truncate_without_key_checks()
+    seed_people(4)
+    people = Person.find([3, 4])
 
-    dbg seed_people(4)
-    dbg Person.find([3, 4])
-
-    # assert Enum.count(people) == 2
+    assert Enum.count(people) == 2
   end
 
   test "find!/1 raises Ecto.NoResultsError for non-existing entity" do
