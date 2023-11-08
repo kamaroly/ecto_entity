@@ -1,7 +1,15 @@
 defmodule Ecto.Entity.DB do
+  @spec __using__(any()) ::
+          {:__block__, [],
+           [
+             {:@, [...], [...]}
+             | {:alias, [...], [...]}
+             | {:def, [...], [...]}
+             | {:import, [...], [...]},
+             ...
+           ]}
   defmacro __using__(_) do
     quote do
-      import Ecto.Entity.Helpers
       alias Ecto.Adapters.SQL
 
       @doc """

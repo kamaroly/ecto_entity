@@ -2,7 +2,6 @@ defmodule Ecto.Entity.Read do
   defmacro __using__(_) do
     quote do
       import Ecto.Query
-      import Ecto.Entity.Helpers
 
       @doc """
       Retrieves all database entries from a schema module
@@ -117,9 +116,6 @@ defmodule Ecto.Entity.Read do
 
       def size(), do: count()
       def size(query), do: count(query)
-
-      def oder_by(), do: __MODULE__ |> order_by(:id)
-      def oder_by(column), do: __MODULE__ |> order_by(^column)
 
       def exist?(id) do
         __MODULE__.in_ids(id)

@@ -4,7 +4,7 @@ defmodule Entity.MixProject do
   def project do
     [
       app: :ecto_entity,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -63,6 +63,7 @@ defmodule Entity.MixProject do
       "guides/howtos/Delete.md",
       "guides/howtos/Association.md",
       "guides/howtos/Conditions.md",
+      "guides/howtos/db.md",
       "guides/cheatsheets/CRUD.cheatmd",
       "guides/cheatsheets/Associations.cheatmd"
     ]

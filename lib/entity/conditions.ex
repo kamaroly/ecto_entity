@@ -3,7 +3,6 @@ defmodule Ecto.Entity.Conditions do
 
   defmacro __using__(_) do
     quote do
-
       def where(field, value) when is_atom(field) do
         from(u in __MODULE__, where: field(u, ^field) == ^value)
       end

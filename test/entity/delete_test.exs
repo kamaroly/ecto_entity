@@ -12,7 +12,7 @@ defmodule Entity.DeleteTests do
 
   test "delete/1 deletes multiple entries at once." do
     seed_people(40)
-    assert {count, nil} = Person.delete([1, 2, 3, 4, 5, 6])
+    assert {_count, nil} = Person.delete([1, 2, 3, 4, 5, 6])
   end
 
   test "destroy/1 removes a record from database." do

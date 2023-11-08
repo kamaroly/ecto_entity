@@ -18,6 +18,8 @@ iex(1)> Person.delete(7)
 
 `delete/1` works the same as `destroy/1`. It's just a preference in pronunciation. 
 
+if you want to delete all table entries, you may `delete/0`
+
 ```elixir
 iex(1)> Person.destroy(2)
 {:ok,
