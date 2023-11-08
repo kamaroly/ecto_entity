@@ -1,9 +1,6 @@
 defmodule Ecto.Entity.Delete do
   defmacro __using__(_) do
     quote do
-      import Ecto.Entity.Helpers, only: [get_repo: 0]
-      use Ecto.Entity.Read, only: [find!: 1, in_ids: 1, not_in_ids: 1]
-
       @doc """
       Get the table name for this schema
 

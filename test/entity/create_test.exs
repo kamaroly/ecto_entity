@@ -21,7 +21,7 @@ defmodule Entity.CreateTests do
     ]
 
     # Expect 3 Entries
-    assert {:ok, %{insert_all: {count, nil}}} = Person.insert_many(attrs)
+    assert {:ok, %{insert_all: {_count, nil}}} = Person.insert_many(attrs)
   end
 
   test "insert_many/1 inserts multiple entries to db at once" do
@@ -32,6 +32,6 @@ defmodule Entity.CreateTests do
     ]
 
     # Insert many and return success query
-    assert {:ok, %{insert_all: {count, nil}}} = Person.insert_many(attrs)
+    assert {:ok, %{insert_all: {_count, nil}}} = Person.insert_many(attrs)
   end
 end

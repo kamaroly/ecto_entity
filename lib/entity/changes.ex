@@ -1,8 +1,6 @@
 defmodule Ecto.Entity.Changes do
   defmacro __using__(_) do
     quote do
-      import Ecto.Entity.Helpers
-
       @doc """
       Get the current module change
       """
