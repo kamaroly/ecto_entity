@@ -8,9 +8,10 @@ defmodule Ecto.Entity.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      Ecto.Entity.Repo
+      Ecto.Entity.Repo,
       # Starts a worker by calling: Entity.Worker.start_link(arg)
       # {Entity.Worker, arg}
+      {Phoenix.PubSub, name: Ecto.Entity.PubSub},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -238,6 +238,7 @@ defmodule Ecto.Entity do
 
       use Ecto.Entity.{
         DB,
+        PubSub,
         Helpers,
         Changes,
         Create,

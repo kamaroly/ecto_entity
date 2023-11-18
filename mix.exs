@@ -4,7 +4,7 @@ defmodule Entity.MixProject do
   def project do
     [
       app: :ecto_entity,
-      version: "0.1.4",
+      version: "1.0.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -32,7 +32,9 @@ defmodule Entity.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.0"},
+      {:phoenix, "~> 1.7"},
       {:myxql, ">= 0.0.0"},
+      {:phoenix_pubsub, "~> 2.1"},
       {:faker, "~> 0.2.0", hex: :elixir_faker, runtime: Mix.env() == :test},
       {:ex_doc, "~> 0.29.4", only: :dev, runtime: false}
     ]
@@ -61,6 +63,7 @@ defmodule Entity.MixProject do
       "guides/howtos/Read.md",
       "guides/howtos/Update.md",
       "guides/howtos/Delete.md",
+      "guides/howtos/Events.md",
       "guides/howtos/Association.md",
       "guides/howtos/Conditions.md",
       "guides/howtos/db.md",
