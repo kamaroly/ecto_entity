@@ -14,4 +14,4 @@ config :ecto_entity, Ecto.Entity.Repo,
   pool_size: 20
 
 config :ecto_entity, ecto_repos: [Ecto.Entity.Repo]
-config :ecto_entity, ecto_pub_sub: Ecto.Entity.PubSub
+config :ecto_entity, pubsub_server: Ecto.Entity.PubSub

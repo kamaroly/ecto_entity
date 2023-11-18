@@ -20,7 +20,7 @@ defmodule Ecto.Entity.Helpers do
       end
 
       def get_pub_sub do
-        Application.get_env(app_name(), :ecto_pub_sub, [])
+        Application.get_env(app_name(), :pubsub_server, [])
         |> case do
             pub_sub -> pub_sub
             _ -> raise "Please configure pub sub `config :ecto_entity, ecto_pub_sub: Phoenix.PubSub`."
