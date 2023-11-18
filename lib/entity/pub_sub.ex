@@ -25,13 +25,13 @@ defmodule Ecto.Entity.PubSub do
       end
 
       def subscribe do
-        Phoenix.PubSub.subscribe(get_pub_sub(), get_name())
+        Phoenix.PubSub.subscribe(get_pub_server(), get_name())
       end
 
       @doc false
       def broadcast({:error, _reason} = error, _event), do: error
       def broadcast({:ok, resource}, event) do
-        case Phoenix.PubSub.broadcast(get_pub_sub(), get_name(), {event, resource}) do
+        case Phoenix.PubSub.broadcast(get_pub_server(), get_name(), {event, resource}) do
           :ok -> {:ok, resource}
            _ ->  IO.puts "Configure you pubsub in `config/config.exs > config :ecto_entity, ecto_pub_sub: Ecto.Entity.PubSub`"
         end

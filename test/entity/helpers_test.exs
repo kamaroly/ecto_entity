@@ -5,4 +5,8 @@ defmodule Entity.HelpersTest do
   test "We can get the repo module to work with" do
     assert get_repo() == Ecto.Entity.Repo
   end
+
+  test "we can get proper PubSub server" do
+      assert get_pub_server() == Ecto.Entity.PubSub
+  end
 end

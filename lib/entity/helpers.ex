@@ -19,7 +19,7 @@ defmodule Ecto.Entity.Helpers do
         end
       end
 
-      def get_pub_sub do
+      def get_pub_server do
         Application.get_env(app_name(), :pubsub_server, [])
         |> case do
             pub_sub -> pub_sub
