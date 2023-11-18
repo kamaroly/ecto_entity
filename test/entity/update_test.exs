@@ -27,7 +27,7 @@ defmodule Entity.UpdateTest do
 
     person_attr = %{first_name: Faker.first_name(), last_name: Faker.last_name()}
 
-    new_person = Person.update(old_person, person_attr)
+    {:ok, new_person} = Person.update(old_person, person_attr)
 
     assert new_person.first_name == person_attr.first_name
     assert new_person.last_name == person_attr.last_name
