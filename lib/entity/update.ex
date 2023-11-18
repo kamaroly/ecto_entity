@@ -19,6 +19,9 @@ defmodule Ecto.Entity.Update do
       def update(id, %{} = attrs) when is_integer(id) and is_map(attrs) do
         find(id) |> update_schema(attrs)
       end
+      def update!(id, %{} = attrs) when is_integer(id) and is_map(attrs) do
+        find(id) |> update_schema!(attrs)
+      end
 
       @doc """
         Update an entity by the schema.
@@ -44,7 +47,9 @@ defmodule Ecto.Entity.Update do
       def update(entity, attrs) when is_map(entity) and is_map(attrs) do
         update_schema(entity, attrs)
       end
-
+      def update!(entity, attrs) when is_map(entity) and is_map(attrs) do
+        update_schema!(entity, attrs)
+      end
       @doc """
       Update many entries that matches a specific query
 
@@ -61,7 +66,13 @@ defmodule Ecto.Entity.Update do
       @doc false
       defp update_schema(entity, attrs) do
         __MODULE__.changeset(entity, attrs)
+        |> get_repo().update()
+        |> __MODULE__.maybe_broadcast_event("updated")
+      end
+      defp update_schema!(entity, attrs) do
+        __MODULE__.changeset(entity, attrs)
         |> get_repo().update!()
+        |> __MODULE__.maybe_broadcast_event("updated")
       end
     end
   end

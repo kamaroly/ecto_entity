@@ -50,7 +50,12 @@ defmodule Ecto.Entity.Delete do
 
       """
       def destroy(ids) when is_list(ids), do: in_ids(ids) |> get_repo().delete_all()
-      def destroy(id) when not is_map(id), do: find!(id) |> get_repo().delete()
+      def destroy(id) when not is_map(id) do
+         find!(id)
+         |> get_repo().delete()
+         |> maybe_broadcast_event("deleted")
+        end
+
       def destroy(entity) when is_map(entity), do: destroy(entity.id)
 
       @doc """
@@ -74,7 +79,6 @@ defmodule Ecto.Entity.Delete do
       def delete_except(ids), do: destroy_except(ids)
 
       def delete(), do: get_repo().delete_all(__MODULE__)
-
     end
   end
 end

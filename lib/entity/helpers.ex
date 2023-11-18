@@ -19,6 +19,14 @@ defmodule Ecto.Entity.Helpers do
         end
       end
 
+      def get_pub_sub do
+        Application.get_env(app_name(), :ecto_pub_sub, [])
+        |> case do
+            pub_sub -> pub_sub
+            _ -> raise "Please configure pub sub `config :ecto_entity, ecto_pub_sub: Phoenix.PubSub`."
+        end
+      end
+
       def get_current_time do
         NaiveDateTime.utc_now()
         |> NaiveDateTime.truncate(:second)

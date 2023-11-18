@@ -18,7 +18,12 @@ defmodule Ecto.Entity.Create do
         age: 3
       }}
       """
-      def create(%{} = attrs), do: schema_change(attrs) |> get_repo().insert()
+      def create(%{} = attrs) do
+        schema_change(attrs)
+        |> get_repo().insert()
+        |> __MODULE__.maybe_broadcast_event("created")
+      end
+
       def insert(%{} = attrs), do: create(attrs)
 
       @doc """
@@ -39,6 +44,8 @@ defmodule Ecto.Entity.Create do
         Ecto.Multi.new()
         |> Ecto.Multi.insert_all(:insert_all, __MODULE__, attrs)
         |> get_repo().transaction()
+
+
       end
 
       def insert_many(attrs) when is_list(attrs), do: create_many(attrs)
