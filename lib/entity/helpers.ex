@@ -64,6 +64,7 @@ defmodule Ecto.Entity.Helpers do
       def module_has_function?(module_name, function_name, arity) do
         :erlang.function_exported(module_name, function_name, arity)
       end
+
     end
   end
 end

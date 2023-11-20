@@ -42,8 +42,8 @@ import Config
 # What Ecto Repo to use for the entity
 config :ecto_entity, app_name: :your_ecto_elixir_app_name
 
-# Configure you pub server like the following.
-config :ecto_entity, pubsub_server: Ecto.Entity.PubSub
+# Configure you pub server like the following. Replace `:app_name` with your app name
+config :app_name, pubsub_server: Ecto.Entity.PubSub
 ```
 
 ## Adding Entity To Your Schema
