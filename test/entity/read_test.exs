@@ -1,8 +1,6 @@
 defmodule Entity.EntityTest do
   use ExUnit.Case
   use Factory
-  alias Person
-
   # HELPERS
   test "table_name/0 returns table name" do
     assert Person.table_name() == "people"
@@ -12,7 +10,8 @@ defmodule Entity.EntityTest do
   # =============
   test "first/0 returns first records" do
     {:ok, person} = seed_people(10) |> Enum.at(0)
-    assert is_integer(Person.first().id)
+
+    assert is_integer(person.id)
   end
 
   test "first!/1 raises Ecto.NoResultsError for non-existing entity" do
